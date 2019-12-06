@@ -5,13 +5,16 @@
   
 
   
-  <title>Hexo</title>
+  <title>jS自测题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+  <meta name="description" content="123456789101112var a = function()&amp;#123;&amp;#125;a.b = 1a.prototype.b = 2a.prototype.c = 3a.prototype.d = 4console.log(a.b)	&#x2F;&#x2F;-&amp;gt;1 console.log(new a().b)	&#x2F;&#x2F;-&amp;gt;2var foo = new a()foo.c = 5console.log(f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jS自测题">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;22&#x2F;renwu&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="123456789101112var a = function()&amp;#123;&amp;#125;a.b = 1a.prototype.b = 2a.prototype.c = 3a.prototype.d = 4console.log(a.b)	&#x2F;&#x2F;-&amp;gt;1 console.log(new a().b)	&#x2F;&#x2F;-&amp;gt;2var foo = new a()foo.c = 5console.log(f">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-01T01:51:29.101Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -59,58 +62,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-http" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/05/http/" class="article-date">
-  <time datetime="2019-12-04T16:00:00.000Z" itemprop="datePublished">2019-12-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/05/http/">图解http笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一、Web基础</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">				    		      客户端</span><br><span class="line">TCP/IP	　　｜应用层:决定了向用户提供应用服务时通信的活动      |</span><br><span class="line">	　　｜      HTTP FTP(文件传输) DNS(解析域名,返回IP) |封装</span><br><span class="line">分层管理　 　｜传输层:两台计算机之间的数据传输	        |添加</span><br><span class="line">	　　｜      TCP(传输控制协议) UPD(用户数据报协议)    |部首</span><br><span class="line">	　　｜网络层:规划数据包(最小数据单位)传输路线         |信息</span><br><span class="line">	　　｜	   IP		                        |</span><br><span class="line">	　　｜链路层:处理硬件:操作系统、网卡、驱动等	        V</span><br></pre></td></tr></table></figure>
-<p>分层优点:简化设计,将整体分割利于替换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">APR协议解析地址,凭借MAC地址进行数据中转</span><br><span class="line">      分割数据包/SYN</span><br><span class="line">发|-------------------&gt;|接</span><br><span class="line">  |	SYN/ACK        |</span><br><span class="line">送|&lt;-------------------|收</span><br><span class="line">  |        ACK         |</span><br><span class="line">端|-------------------&gt;|端</span><br><span class="line"></span><br><span class="line">DNS查找IP</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">协议:(认证)@服务器地址:(端口)/文件路径?(查询字符串)#(片段标识符)</span><br><span class="line">查询字符串:?参数=值&amp;参数=值&amp;...</span><br><span class="line">	固定参数:访问分析,不影响页面内容</span><br><span class="line">	活动参数:影响内容,可用于筛选等,若有页内链接&apos;URL+参数+页内链接&apos;</span><br><span class="line">片段标识符:标记子资源</span><br><span class="line"></span><br><span class="line">RFC 征求修正意见书，用来制定HTTP技术标准</span><br></pre></td></tr></table></figure>
-<p>二、简单的HTTP协议</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">请求报文</span><br><span class="line">|请求方法(GET POST)/请求URI(*) 协议版本(HTTP/1.1)---请求行</span><br><span class="line">|(请求首部 内容实体)(HOST: hackr.jp)[(请求)(通用)(实体)](首部字段)</span><br><span class="line">|-----------------------------------------------------</span><br><span class="line">		|	^</span><br><span class="line">	请求	V	|响应</span><br><span class="line">|-----------------------------------------------------</span><br><span class="line">|HTTP/1.1 200 OK</span><br><span class="line">|协议版本 状态码 原因---------------------------状态行</span><br><span class="line">|(空行)</span><br><span class="line">|Date: Tue, 10 Jul 2012 06:50:15 GMT</span><br><span class="line">|...响应首部字段 资源实体[(响应)(通用)(实体)](首部字段)</span><br><span class="line">响应报文</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">请求方法(HTTP/1.1)</span><br><span class="line">GET: 获取资源;</span><br><span class="line">POST: 传输实体主体</span><br><span class="line">PUT: 传输文件(不使用)</span><br><span class="line">HEAD: 获得报文首部，类似GET,只是不返回报文主体，用于确认URI的有效性和日期</span><br><span class="line">PUT/DELETE: 推送/删除(不使用)</span><br><span class="line">OPITONS: 询问支持方法</span><br><span class="line">TRACE: 追踪路径(确认加工/篡改)(易被攻击,少用)</span><br><span class="line">CONNECT: 代理服务器通讯建立隧道,进行TCP通讯(用SSL TLS) CONNECT 服务器名:端口 HTTP版本</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http是无状态的协议</span><br><span class="line">cokkie用于本地保存文件，减少服务端负担。用于认证信息。</span><br></pre></td></tr></table></figure>
-<pre><code class="txt">报文主体用于描述传输文件
-实体主体表示传输具体内容，可在传输中编码(压缩)
-大文件分割发送
-</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/http/" data-id="ck3suv0g40000d2cl8gh438ws" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-renwu" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-renwu" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/22/renwu/" class="article-date">
   <time datetime="2019-11-21T16:00:00.000Z" itemprop="datePublished">2019-11-22</time>
@@ -123,8 +75,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/22/renwu/">jS自测题</a>
+    <h1 class="article-title" itemprop="name">
+      jS自测题
     </h1>
   
 
@@ -176,139 +128,28 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-links" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/16/links/" class="article-date">
-  <time datetime="2019-11-16T07:02:43.337Z" itemprop="datePublished">2019-11-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2019/12/05/http/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/16/links/">网页制作中的一些知识点(链接)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>vertical-align <a href="http://www.cnblogs.com/starof/articles/4512284.html" target="_blank" rel="noopener">点击传送</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/16/links/" data-id="ck3suv0gw0003d2cl1ndiheuu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-point1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/12/point1/" class="article-date">
-  <time datetime="2019-11-12T15:18:48.076Z" itemprop="datePublished">2019-11-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          图解http笔记
         
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/12/point1/">C语言中的注意点(就个人而言)(持续更进)</a>
-    </h1>
   
+    <a href="/2019/11/16/links/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">网页制作中的一些知识点(链接)</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>要注意赋值运算符”=”和比较运算符”==”</li>
-</ol>
-<p><img src="http://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=photo&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=207327845,1186447375&os=1604080497,67848917&simid=3987492593,621729264&pn=5&rn=1&di=167090&ln=1272&fr=&fmq=1573569502767_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fphotocdn.sohu.com%2F20110720%2FImg313970154.jpg&rpstart=0&rpnum=0&adpicid=0&force=undefined" alt="img"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/point1/" data-id="ck3suv0gu0002d2cl51yd0dxi" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/04/hello-world/" class="article-date">
-  <time datetime="2019-11-04T15:44:10.783Z" itemprop="datePublished">2019-11-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/04/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/04/hello-world/" data-id="ck3suv0gk0001d2cl1o2ug2e0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
