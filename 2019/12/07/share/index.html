@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>图解HTTP分享 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="内容协商 客户端驱动协商发送两次请求，第一次获取资源列表，第二次获得选定的版本 服务端驱动协商服务器根据客户端请求首部决定并返回页面 透明协商通过中间设备代表客户端进行协商 q值 语言优先级&#x2F;缓存&#x2F;vary 保存请求首部，在缓存中匹配，查询到则返回 定义于 Uniform Resource Identifier (URI): Generic SyntaxURI: 统一资源(标识)符 包括URL和U">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图解HTTP分享">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;share&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="内容协商 客户端驱动协商发送两次请求，第一次获取资源列表，第二次获得选定的版本 服务端驱动协商服务器根据客户端请求首部决定并返回页面 透明协商通过中间设备代表客户端进行协商 q值 语言优先级&#x2F;缓存&#x2F;vary 保存请求首部，在缓存中匹配，查询到则返回 定义于 Uniform Resource Identifier (URI): Generic SyntaxURI: 统一资源(标识)符 包括URL和U">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-07T15:08:23.704Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-share" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/07/share/" class="article-date">
+  <time datetime="2019-12-06T16:00:00.000Z" itemprop="datePublished">2019-12-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      图解HTTP分享
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://www.cnblogs.com/supersnowyao/p/8593828.html" target="_blank" rel="noopener">内容协商</a></p>
+<h3 id="客户端驱动协商"><a href="#客户端驱动协商" class="headerlink" title="客户端驱动协商"></a>客户端驱动协商</h3><p>发送两次请求，第一次获取资源列表，第二次获得选定的版本</p>
+<h3 id="服务端驱动协商"><a href="#服务端驱动协商" class="headerlink" title="服务端驱动协商"></a>服务端驱动协商</h3><p>服务器根据客户端请求首部决定并返回页面</p>
+<h3 id="透明协商"><a href="#透明协商" class="headerlink" title="透明协商"></a>透明协商</h3><p>通过中间设备代表客户端进行协商</p>
+<p>q值 语言优先级/缓存/vary 保存请求首部，在缓存中匹配，查询到则返回</p>
+<p>定义于 <a href="https://tools.ietf.org/html/rfc3986" target="_blank" rel="noopener">Uniform Resource Identifier (URI): Generic Syntax</a><br>URI: 统一资源(标识)符 包括URL和URN<br>URL: 统一资源(定位)符 提供路径 用具体路径来定位资源,大部分网址都是URL<br>URN: 统一资源名称 代表资源名称 在某一命名空间里通过表识资源名称来定位该资源<br>     运用实例:磁力链接(baidu)</p>
+<p>磁力链接:<br>‘磁力链接不基于文档的IP地址或定位符，而是在分布式数据库中，通过散列函数值来识别、搜索来下载文档。因为不依赖一个处于启动状态的主机来下载文档，所以特别适用没有中心服务器的对等网络。磁力链接由一组参数组成，参数间的顺序没有讲究，其格式与在HTTP链接末尾的查询字符串相同。通常是一个特定文件的内容散列函数值形成的URN’<br>通过文件内的代码生成一个独一无二的ID来指定文件，与地址无关。<br>magnet:?xt=urn:btih:</p>
+<p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt(URL)" target="_blank" rel="noopener">ftp://ftp.is.co.za/rfc/rfc1808.txt(URL)</a><br><a href="http://www.ietf.org/rfc/rfc2396.txt(URL)" target="_blank" rel="noopener">http://www.ietf.org/rfc/rfc2396.txt(URL)</a><br>ldap://[2001:db8::7]/c=GB?objectClass?one(URL)<br>mailto:<a href="mailto:John.Doe@example.com" target="_blank" rel="noopener">John.Doe@example.com</a>(URL)<br>news:comp.infosystems.<a href="http://www.servers.unix(URL)" target="_blank" rel="noopener">www.servers.unix(URL)</a><br>tel:+1-816-555-1212<br>telnet://192.0.2.16:80/(URL)<br>urn:oasis:names:specification:docbook:dtd:xml:4.1.2</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/07/share/" data-id="ck3ud1ol90001mmcl42lz2si7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/05/http/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">图解http笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/07/share/">图解HTTP分享</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/05/http/">图解http笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/22/renwu/">jS自测题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/16/links/">网页制作中的一些知识点(链接)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
