@@ -256,7 +256,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-12 00:55:03" itemprop="dateModified" datetime="2019-12-12T00:55:03+08:00">2019-12-12</time>
+                <time title="Modified: 2019-12-13 00:47:54" itemprop="dateModified" datetime="2019-12-13T00:47:54+08:00">2019-12-13</time>
               </span>
 
           
@@ -270,7 +270,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <p>短连接AND长连接<br>HTTP/1.1起默认长连接 断开连接 Connection:close;<br>HTTP/1.1前默认短连接 建立链接 Connection:Keep-Alive</p>
+<p>验证缓存<br>ETag首部字段，用于标识资源。同一个URL下会有多个不同的资源，为了区分引入了ETag。<br>ETag放入If-None-Match首部中，可用于检查资源是否有效，若有效则返回304 Not Modified。</p>
+<p>范围请求<br>为了避免网络中断后重复发送数据，用range指定发送数据范围<br>请求成功后服务器返回206 Partial Content 状态码</p>
+<p>HTTPS</p>
+<p>HTTP缺陷:</p>
+<ol>
+<li>明文通信，可能被窃听</li>
+<li>身份易被伪装</li>
+<li>报文有风险被篡改</li>
+</ol>
+<p>HTTPS  |HTTP –&gt; SSL–&gt; TCP|<br>SSL是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层与应用层之间对网络连接进行加密。<br>1）认证用户和服务器，确保数据发送到正确的客户机和服务器；<br>2）加密数据以防止数据中途被窃取；<br>3）维护数据的完整性，确保数据在传输过程中不被改变。</p>
+<p>流程</p>
+<p>服务器认证</p>
+<p>客户端    |—-&gt;    发送    开始      信息    ——&gt;    |服务器<br>    |&lt;—-    判断    生成秘钥  响应    &lt;——    |<br>    |—-&gt;    生成秘钥 加密    传输    ——&gt;    |<br>    |&lt;—-    回复秘钥 返回认证信息    &lt;——    |</p>
+<p>用户认证</p>
+<p>客户端    |&lt;—-        发送提问    &lt;——    |服务器<br>    |—-&gt;    返回数字签名和公开密钥    ——&gt;    |</p>
+<p>加密<br> 对称加密: 使用同一密钥(优:运算快;缺点:无法将密钥安全传输)<br>不对称加密:使用不同密钥(优:安全传输密钥;缺:运算速度慢)</p>
+<p>HTTPS 不对称加密密钥，再用对称密钥通信</p>
+
       
     </div>
 
