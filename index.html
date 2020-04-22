@@ -164,6 +164,169 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/share-2.1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/01/share-2.1/" class="post-title-link" itemprop="url">19级分享</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-05-01T00:00:00+08:00">2020-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-22 22:00:35" itemprop="dateModified" datetime="2020-04-22T22:00:35+08:00">2020-04-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="将-react-配置到-github-pages-上"><a href="#将-react-配置到-github-pages-上" class="headerlink" title="将 react 配置到 github pages 上"></a>将 react 配置到 github pages 上</h3><p>没钱买服务器，又想要和别人分享自己的文件，第一个想到的就是github-pages。但是位子又被hexo博客占用了，一开始想的是不停的往这个站点下面提交不同的文件，但是感觉太麻烦了，就发现了这个。</p>
+<p>gh-pages是github-pages的分支页面，将文件上传到分支之后就可以了</p>
+<p>推送的文件必须是打包后的静态文件，所以在提交之前先执行打包 <code>npm run build</code></p>
+<ol>
+<li><p>配置 package.json 文件</p>
+<p> 设置homepage保证css和js的路径不会出错</p>
+<p> homepage 地址为 github page 分支地址一般为”<a href="https://user-name.github.io/project-name&quot;" target="_blank" rel="noopener">https://user-name.github.io/project-name&quot;</a></p>
+</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"share"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</span><br><span class="line">  <span class="attr">"homepage"</span>: <span class="string">"https://shi-zhong.github.io/share"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在项目目录下运行终端</p>
+<ol>
+<li>创建分支 gh-pages<br><code>git checkout --orphan gh-pages</code></li>
+<li>提交本地<br><code>git add ..</code> and <code>git commit -m ..</code></li>
+<li>提交到分支<br><code>git push origin gh-pages</code></li>
+</ol>
+<hr>
+<p>或者安装 gh-pages 简化提交过程</p>
+<ol>
+<li>安装 gh-pages</li>
+</ol>
+<figure class="highlight plain"><figcaption><span>install gh-pages --save-dev```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  gh-pages官网[https://www.npmjs.com/package/gh-pages](https://www.npmjs.com/package/gh-pages)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2. 配置脚本 &quot;predeploy&quot;: 打包文件; &quot;deploy&quot;: 上传文件至github的分支</span><br><span class="line"></span><br><span class="line">``` json</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;react-scripts start&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;react-scripts build&quot;,</span><br><span class="line">    &quot;test&quot;: &quot;react-scripts test&quot;,</span><br><span class="line">    &quot;eject&quot;: &quot;react-scripts eject&quot;,</span><br><span class="line">    &quot;predeploy&quot;: &quot;npm run build&quot;,</span><br><span class="line">    &quot;deploy&quot;: &quot;gh-pages -d build&quot;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>将文件上传至github, 执行<code>npm run deploy</code><br>终端会将文件打包并将编好的文件</p>
+</li>
+<li><p>访问 设置的网址</p>
+</li>
+</ol>
+<h3 id="下拉刷新的实现"><a href="#下拉刷新的实现" class="headerlink" title="下拉刷新的实现"></a>下拉刷新的实现</h3><p>下拉刷新的实现有以下几个要求:</p>
+<ol>
+<li>触顶下拉</li>
+<li>松手回弹</li>
+<li>阈值刷新</li>
+</ol>
+<p>使画面移动的方法有很多，通过<code>定位</code>来改变，通过<code>translate</code>来改变，还可一通过设置滚动条的<code>scrollTop</code>实现。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/14/links/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/14/links/" class="post-title-link" itemprop="url">网页制作中的一些知识点(链接)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-14 20:02:44" itemprop="dateCreated datePublished" datetime="2020-04-14T20:02:44+08:00">2020-04-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>vertical-align <a href="http://www.cnblogs.com/starof/articles/4512284.html" target="_blank" rel="noopener">点击传送</a></li>
+<li>桌面美化 <a href="https://blog.csdn.net/lfs666666/article/details/87200054" target="_blank" rel="noopener">links</a></li>
+<li>桌面主题 <code>sudo apt-get install gnome-tweak-tool</code><br><a href="https://blog.csdn.net/lishanleilixin/article/details/80453565" target="_blank" rel="noopener">gnome-tweak-tool</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/react-about/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -441,67 +604,6 @@
 
       
           <p>这里使用的虚拟机为Vbox,官网进行下载(不记得命令行)，挂载正确的ISO文件，和增强ISO文件，将光盘作为第一启动项(系统),启动，选择启动盘，安装，在资源管理里找到增强光驱，运行安装程序。重启。在启动前讲硬盘放到第一位(否则会重新安装)。<br>[感觉增强似乎没啥用，画质好像好了一丢丢   (=-=)   ]</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/12/links/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/12/links/" class="post-title-link" itemprop="url">网页制作中的一些知识点(链接)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-12 15:59:27" itemprop="dateCreated datePublished" datetime="2019-12-12T15:59:27+08:00">2019-12-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>vertical-align <a href="http://www.cnblogs.com/starof/articles/4512284.html" target="_blank" rel="noopener">点击传送</a></li>
-<li>桌面美化 <a href="https://blog.csdn.net/lfs666666/article/details/87200054" target="_blank" rel="noopener">links</a></li>
-</ol>
 
       
     </div>
@@ -924,12 +1026,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
