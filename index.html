@@ -164,6 +164,235 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/23/share3-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/23/share3-2/" class="post-title-link" itemprop="url">19级分享</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2020-07-23T00:00:00+08:00">2020-07-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-26 15:41:40" itemprop="dateModified" datetime="2020-07-26T15:41:40+08:00">2020-07-26</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>众所周知, 生活在js里的数组和对象是一种桀骜不驯的引用类型, 我们无法用’=’让他们好好听话, 小小的’=’无法创造新的对象, 只能创造出他们的分身, 这实在是令人沮丧.  但是记录历史我们是专业的, 有幸我们寻找到了驯服野生引用类型的珍贵资料.</p>
+<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p>引用类型是一种可以套娃的”数据类型”, 浅拷贝只是在第一层, 而深拷贝可以在无数层;对象利用<code>Object.keys(obj);</code>,<code>Object.getOwnPropertyNames</code>和<code>for...in</code>或者遍历等对各个键值对进行复制.<br>例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">objShallowClone</span>(<span class="params">source</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> target = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> source) &#123;</span><br><span class="line">        <span class="keyword">if</span> (source.hasOwnProperty(i)) &#123;</span><br><span class="line">            target[i] = source[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> target;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ArrayShallowClone</span>(<span class="params">source</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> source.map(<span class="function">(<span class="params">a</span>) =&gt;</span> a;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>方法一 JSON转换 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj));</span><br></pre></td></tr></table></figure>
+<p>缺点：</p>
+<p>（1）如果对象里有函数,函数无法被拷贝下来</p>
+<p>（2）无法拷贝copyObj对象原型链上的属性和方法</p>
+<p>（3）当数据的层次很深，会栈溢出</p>
+<p>方法二 递归函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params"> source </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!(<span class="keyword">typeof</span> sourse === <span class="string">'object'</span> &amp;&amp; sourse !== <span class="literal">null</span>)) <span class="keyword">return</span> source; </span><br><span class="line">  <span class="keyword">let</span> target = <span class="built_in">Array</span>.isArray( source ) ? [] : &#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> k <span class="keyword">in</span> source ) &#123;</span><br><span class="line">    <span class="keyword">if</span> (source.hasOwnProperty(k)) &#123;</span><br><span class="line">      <span class="keyword">if</span> ( <span class="keyword">typeof</span> source[ k ] === <span class="string">'object'</span> ) &#123;</span><br><span class="line">            target[ k ] = deepCopy( source[ k ] )</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            target[ k ] = source[ k ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> target</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>缺点<br> (1) 当数据的层次很深，会栈溢出;</p>
+<p>方法三 模拟栈克隆</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloneLoop</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> root = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 栈</span></span><br><span class="line">    <span class="keyword">const</span> loopList = [</span><br><span class="line">        &#123;</span><br><span class="line">            parent: root,</span><br><span class="line">            key: <span class="literal">undefined</span>,</span><br><span class="line">            data: x,</span><br><span class="line">        &#125;</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(loopList.length) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> node = loopList.pop();</span><br><span class="line">        <span class="keyword">const</span> parent = node.parent;</span><br><span class="line">        <span class="keyword">const</span> key = node.key;</span><br><span class="line">        <span class="keyword">const</span> data = node.data;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化赋值目标，key为undefined则拷贝到父元素，否则拷贝到子元素</span></span><br><span class="line">        <span class="keyword">let</span> res = parent;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> key !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">            res = parent[key] = &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k <span class="keyword">in</span> data) &#123;</span><br><span class="line">            <span class="keyword">if</span> (data.hasOwnProperty(k)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">typeof</span> data[k] === <span class="string">'object'</span>) &#123;</span><br><span class="line">                    <span class="comment">// 下一次循环</span></span><br><span class="line">                    loopList.push(&#123;</span><br><span class="line">                        parent: res,   <span class="comment">//对象主体</span></span><br><span class="line">                        key: k,        <span class="comment">//属性名</span></span><br><span class="line">                        data: data[k], <span class="comment">//属性值</span></span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    res[k] = data[k];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以这个对象为例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  describe: <span class="string">"floor1"</span>,</span><br><span class="line">  parent:&#123;</span><br><span class="line">    describe: <span class="string">"floor2"</span>,</span><br><span class="line">    parent:&#123;</span><br><span class="line">      describe: <span class="string">"floor3"</span>,</span><br><span class="line">      parent:&#123;</span><br><span class="line">        describe: <span class="string">"floor4"</span>,</span><br><span class="line">        parent:&#123;</span><br><span class="line">          child: <span class="string">"floor5"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  parent2:&#123;</span><br><span class="line">    describe: <span class="string">"floor2"</span>,</span><br><span class="line">    parent2:&#123;</span><br><span class="line">      child: <span class="string">"floor3"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一次循环中res为<code>{}</code>, 遍历obj中的属性, 符合OwnProperty的对象会被记录,而普通的基本数据会被复制. 此时<code>looplist</code>的值为</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">looplist = [&#123;</span><br><span class="line">  parent: &#123;</span><br><span class="line">    descibe: <span class="string">"floor1"</span></span><br><span class="line">  &#125;(<span class="number">1</span>),</span><br><span class="line">  key: <span class="string">"parent"</span>,</span><br><span class="line">  data: obj[parent]</span><br><span class="line">&#125;,&#123;</span><br><span class="line">  parent: &#123;</span><br><span class="line">    descibe: <span class="string">"floor1"</span></span><br><span class="line">  &#125;(<span class="number">1</span>),</span><br><span class="line">  key: <span class="string">"parent2"</span>,</span><br><span class="line">  data: obj[parent2]</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+<p>最外层的对象遍历完成list中的元素, 相比利用递归算法使用真正的栈, 这个算法利用数组模拟栈, 使得栈不会轻易溢出, 增强了程序运行的稳定性.<br>第二次循环复制  <code>parent2</code>这个对象, <code>describe</code>会被推入对象, 而里面的的<code>parent2</code>对象会被放入模拟栈中, 等待执行.<br>第三次会将<code>child: floor3</code>复制…<br>由此可知, 每次执行时都会复制当层对象的基本数据, 将对象推入栈中. 逐层将对象完善.<br>在我认为, 递归算法是一次性将所有属性放到新的对象中, 不求出这个对象到底是什么不继续复制当层数据, 而这个算法是分次将属性复制, 我不在乎这个对象是什么, 只需要这里有一个对象, 等我把大体做完再追求细节, 这种思维是值得学习的. 将栈高转化成栈宽也是值得学习的.</p>
+<p>数组的拷贝也是如此, 在执行的时候再加入一条数组的判断, 上面的程序会更加完整.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/23/share3-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/23/share3-1/" class="post-title-link" itemprop="url">19级分享</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-23 00:00:00 / 修改时间：22:02:35" itemprop="dateCreated datePublished" datetime="2020-07-23T00:00:00+08:00">2020-07-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="事件-event"><a href="#事件-event" class="headerlink" title="事件(event)"></a>事件(event)</h2><p>事件被定义用来处理 用户 和 页面 的交互.onabort, onblur, onchange…等都是常见的<a href="https://www.w3school.com.cn/js/jsref_events.asp" target="_blank" rel="noopener">事件</a>.</p>
+<p>在js中,我们可以通过对元素的事件添加函数来绑定事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params">...arg</span>) </span>&#123; statements &#125;;</span><br></pre></td></tr></table></figure>
+<p>对一个DOM元素进行多次绑定时,后者将覆盖前者.<br>移除事件只需要将绑定在DOM元素的函数重新赋值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>).onclick = <span class="literal">null</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>另一种注册事件的方式支持一个事件绑定多个函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> demo = <span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>);</span><br><span class="line">demo.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  statements;</span><br><span class="line">&#125;，<span class="literal">false</span>);</span><br><span class="line"><span class="comment">//第三个参数默认为false,事件冒泡。如果是true则是事件捕获</span></span><br><span class="line">demo.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  statements2;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>事件移除</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">demo.removeEventListener(<span class="string">'click'</span>, func);</span><br><span class="line"><span class="comment">// func 是 已经添加的有命名的函数, 匿名函数无法移除</span></span><br></pre></td></tr></table></figure>
+
+<p>老版本事件注册, 当时ie不支持事件捕获, 所以只有两个参数.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">demo.attachEvent(<span class="string">'onclick'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; statement &#125;);</span><br><span class="line">demo.attachEvent(<span class="string">'onclick'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; statement &#125;);</span><br><span class="line"><span class="comment">//移除事件</span></span><br><span class="line">demo.detachEvent(<span class="string">'onclick'</span>, func);</span><br></pre></td></tr></table></figure>
+
+<h2 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h2><p>网页是一个树状结构, 当事件触发时, 网页可以从出发事件的元素开始向上传递信息, 一层层向上冒泡, 也可以由网页向下去寻找捕获触发事件的元素.<br>现在的网页结合了两种, 当事件发生时, 网页会从最大的window出发, 经由document,body…ele捕获到交互的元素, 再从这个元素开始, 原路返回, 向上冒泡.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line">``` </span><br><span class="line">事件传递 window -&gt; document -&gt; body -&gt; div -&gt; p -&gt; /p -&gt; /div -&gt; /body -&gt; document -&gt; window</span><br><span class="line">事件冒泡只会在自己的window范围内执行, 如果使用 iframe 将页面进行 套娃, 外部元素的事件不会收到内部的冒泡信息;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用 `event.stopPropagation();`可以阻止事件进一步传递; 既可以阻止捕获, 也可以阻止冒泡, 当一个元素上绑定了多个事件时, 同类事件会被执行. </span><br><span class="line"></span><br><span class="line">例如 div['a1','b1','c1'] -&gt; div2['a2','b2 || ','c2'] -&gt; /div2['/a1','/b1','/c1'] -&gt; /div['/a1','/b1','/c1']</span><br><span class="line">(括号内表示依次被绑定的函数 alert(x), || 表示 event.stopPropagation(); )</span><br><span class="line">那么输出是 a1,b1,c1,a2,b2,c2; 同一个元素的后续会被执行;</span><br><span class="line"></span><br><span class="line">`event.stopImmediatePropagation();` 与 `event.stopPropagation();` 类似, 但是 `event.stopImmediatePropagation();`会阻止同类事件继续执行, 即输出为 a1,b1,c1,a2,b2;</span><br><span class="line"></span><br><span class="line">在react中注册事件[参考链接](https://segmentfault.com/a/1190000017855734)</span><br><span class="line">``` jsx</span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span></span></span><br><span class="line"><span class="tag">  <span class="attr">onClick</span>=<span class="string">&#123;this.func&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">onClickCapture</span>=<span class="string">&#123;this.func&#125;</span></span></span><br><span class="line"><span class="tag"> &gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在react中的事件是合成事件, 并不是js原生的. 在这个系统中,所有事件委托给顶部的document元素, 由document统一执行触发.在合成事件中<code>event.stopPropagation();</code>并不能真正阻止事件传播.”元素被点击时，真正的元素还是按照冒泡的方式，层层将事件交给上级元素进行处理，最后事件传播到docuement，触发合成事件”<code>event.stopPropagation();</code>阻止的是合成事件中的事件流. 如果给交互的元素绑定上真正的事件, 合成事件会被终止.<br>从合成事件里的event中可以获取原生event的属性,但是这个对象对于全局来说只有一个,每次事件结束之后会被清空,因此无法用异步操作获取.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div</span><br><span class="line">  onClick=&#123;(e)=&gt;&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">        x: e.clientX,</span><br><span class="line">        y: e.clientY</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,<span class="number">1000</span>);</span><br><span class="line">  &#125;&#125;</span><br><span class="line">&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ Warning: This synthetic event is reused for preformance reasons.</span></span><br></pre></td></tr></table></figure>
+<p>有时我们需要混合使用原生事件与合成事件, 在生命周期中添加 <code>document.addEventListener(&#39;click&#39;, function(){});</code>, 上文提到在元素上绑定的事件会被处理成合成事件绑定在document中, 所以在触发一个时,必定触发另一个<code>event.stopPropagation();</code>无法阻止事件传播.必要时我们可以通过ref获取元素实例,通过对比 原生中<code>e.target</code>是否与合成事件中的目标相同来对控制流进行改变. 获取实例<code>React.createRef();</code></p>
+<p>在nodejs中的event模块也是大同小异<br>event有且仅提供了一个events.EventEmitter对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="keyword">var</span> eventEmitter = <span class="keyword">new</span> events.EventEmitter();</span><br></pre></td></tr></table></figure>
+<p>添加事件 <code>eventEmitter.addListener(&#39;eventName&#39;, listener);</code>或者<code>eventEmitter.on(&#39;eventName&#39;, listener);</code><br>移除事件 <code>removeListener(&#39;eventName&#39;, listener)</code> 移除所有,或指定复数事件 <code>removeAllListeners([event])</code><br>监听事件<code>emit(event, ...argu);</code><br>设置事件最大数量 <code>life.setMaxListeners(eventCount);</code><br>…</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/27/java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/27/java/" class="post-title-link" itemprop="url">JAVA NOTE</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-27 00:00:00 / 修改时间：23:22:14" itemprop="dateCreated datePublished" datetime="2020-05-27T00:00:00+08:00">2020-05-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>声明变量<br>整数类(byte、short、int、long)、文本类(char)、浮点类(double、float)和逻辑类(boolean)。<br>int a = 123;<br>static a = 123;</li>
+</ol>
+<p>对象运算符 instanceof 判断是否属于某类或其子类实例</p>
+<p>int a[]={};<br>pencil b[]={};<br>a = new int[10];<br>b = new pencil[20];<br>访问说明符 class 类名 extends 超类名 implements 接口名<br>访问说明符有public、private和protected三种</p>
+<p>Hashtable类<br>Enumeration接口<br>StringBuffer类<br>StringTokenizer类</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/01/share-2.1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -741,254 +970,12 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/share/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/07/share/" class="post-title-link" itemprop="url">图解HTTP分享</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-07 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-07T00:00:00+08:00">2019-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-14 23:56:43" itemprop="dateModified" datetime="2019-12-14T23:56:43+08:00">2019-12-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://www.cnblogs.com/supersnowyao/p/8593828.html" target="_blank" rel="noopener">内容协商</a></p>
-<h3 id="客户端驱动协商"><a href="#客户端驱动协商" class="headerlink" title="客户端驱动协商"></a>客户端驱动协商</h3><p>发送两次请求，第一次获取资源列表，第二次获得选定的版本</p>
-<h3 id="服务端驱动协商"><a href="#服务端驱动协商" class="headerlink" title="服务端驱动协商"></a>服务端驱动协商</h3><p>服务器根据客户端请求首部决定并返回页面</p>
-<h3 id="透明协商"><a href="#透明协商" class="headerlink" title="透明协商"></a>透明协商</h3><p>通过中间设备代表客户端进行协商</p>
-<p>q值 语言优先级/缓存/vary 保存请求首部，在缓存中匹配，查询到则返回</p>
-<p>定义于 <a href="https://tools.ietf.org/html/rfc3986" target="_blank" rel="noopener">Uniform Resource Identifier (URI): Generic Syntax</a><br>URI: 统一资源(标识)符 包括URL和URN<br>URL: 统一资源(定位)符 提供路径 用具体路径来定位资源,大部分网址都是URL<br>URN: 统一资源名称 代表资源名称 在某一命名空间里通过表识资源名称来定位该资源<br>     运用实例:磁力链接(baidu)</p>
-<p>磁力链接:<br>‘磁力链接不基于文档的IP地址或定位符，而是在分布式数据库中，通过散列函数值来识别、搜索来下载文档。因为不依赖一个处于启动状态的主机来下载文档，所以特别适用没有中心服务器的对等网络。磁力链接由一组参数组成，参数间的顺序没有讲究，其格式与在HTTP链接末尾的查询字符串相同。通常是一个特定文件的内容散列函数值形成的URN’<br>通过文件内的代码生成一个独一无二的ID来指定文件，与地址无关。<br>magnet:?xt=urn:btih:</p>
-<p><a href="ftp://ftp.is.co.za/rfc/rfc1808.txt(URL)" target="_blank" rel="noopener">ftp://ftp.is.co.za/rfc/rfc1808.txt(URL)</a><br><a href="http://www.ietf.org/rfc/rfc2396.txt(URL)" target="_blank" rel="noopener">http://www.ietf.org/rfc/rfc2396.txt(URL)</a><br>ldap://[2001:db8::7]/c=GB?objectClass?one(URL)<br>mailto:<a href="mailto:John.Doe@example.com" target="_blank" rel="noopener">John.Doe@example.com</a>(URL)<br>news:comp.infosystems.<a href="http://www.servers.unix(URL)" target="_blank" rel="noopener">www.servers.unix(URL)</a><br>tel:+1-816-555-1212<br>telnet://192.0.2.16:80/(URL)<br>urn:oasis:names:specification:docbook:dtd:xml:4.1.2</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/05/http/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/05/http/" class="post-title-link" itemprop="url">图解http笔记</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-05 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-05T00:00:00+08:00">2019-12-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-08 09:07:04" itemprop="dateModified" datetime="2019-12-08T09:07:04+08:00">2019-12-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="一、Web基础"><a href="#一、Web基础" class="headerlink" title="一、Web基础"></a>一、Web基础</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">				    		      客户端</span><br><span class="line">TCP/IP	　　｜应用层:决定了向用户提供应用服务时通信的活动        |</span><br><span class="line">	　　｜      HTTP FTP(文件传输) DNS(解析域名,返回IP) |封装</span><br><span class="line">分层管理　 　｜传输层:两台计算机之间的数据传输		        |添加</span><br><span class="line">	　　｜      TCP(传输控制协议) UPD(用户数据报协议)    |部首</span><br><span class="line">	　　｜网络层:规划数据包(最小数据单位)传输路线           |信息</span><br><span class="line">	　　｜	   IP		                        |</span><br><span class="line">	　　｜链路层:处理硬件:操作系统、网卡、驱动等	        V</span><br><span class="line"></span><br><span class="line">分层优点:简化设计,将整体分割利于替换</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">APR协议解析地址,凭借MAC地址进行数据中转</span><br><span class="line">      分割数据包/SYN</span><br><span class="line">发|-------------------&gt;|接</span><br><span class="line">  |	SYN/ACK        |</span><br><span class="line">送|&lt;-------------------|收</span><br><span class="line">  |        ACK         |</span><br><span class="line">端|-------------------&gt;|端</span><br><span class="line"></span><br><span class="line">DNS查找IP</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">协议:(认证)@服务器地址:(端口)/文件路径?(查询字符串)#(片段标识符)</span><br><span class="line">查询字符串:?参数=值&amp;参数=值&amp;...</span><br><span class="line">	固定参数:访问分析,不影响页面内容</span><br><span class="line">	活动参数:影响内容,可用于筛选等,若有页内链接&apos;URL+参数+页内链接&apos;</span><br><span class="line">片段标识符:标记子资源,例如查询.html文件里的id=msg,则.html#msg</span><br><span class="line"></span><br><span class="line">RFC 征求修正意见书，用来制定HTTP技术标准</span><br></pre></td></tr></table></figure>
-
-<h3 id="二、简单的HTTP协议"><a href="#二、简单的HTTP协议" class="headerlink" title="二、简单的HTTP协议"></a>二、简单的HTTP协议</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">请求报文</span><br><span class="line">|请求方法(GET POST)/请求URI(*) 协议版本(HTTP/1.1)---请求行</span><br><span class="line">|(请求首部 内容实体)(HOST: hackr.jp)[(请求)(通用)(实体)](首部字段)</span><br><span class="line">|-----------------------------------------------------</span><br><span class="line">		|	^</span><br><span class="line">	请求	V	|响应</span><br><span class="line">|-----------------------------------------------------</span><br><span class="line">|HTTP/1.1 200 OK</span><br><span class="line">|协议版本 状态码 原因---------------------------状态行</span><br><span class="line">|(空行)</span><br><span class="line">|Date: Tue, 10 Jul 2012 06:50:15 GMT</span><br><span class="line">|...响应首部字段 资源实体[(响应)(通用)(实体)](首部字段)</span><br><span class="line">响应报文</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">请求方法(HTTP/1.1)</span><br><span class="line">GET: 获取资源;</span><br><span class="line">POST: 传输实体主体</span><br><span class="line">PUT: 传输文件(不使用)</span><br><span class="line">HEAD: 获得报文首部，类似GET,只是不返回报文主体，用于确认URI的有效性和日期</span><br><span class="line">PUT/DELETE: 推送/删除(不使用)</span><br><span class="line">OPITONS: 询问支持方法</span><br><span class="line">TRACE: 追踪路径(确认加工/篡改)(易被攻击,少用)</span><br><span class="line">CONNECT: 代理服务器通讯建立隧道,进行TCP通讯(用SSL TLS) CONNECT 服务器名:端口 HTTP版本</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http是无状态的协议</span><br><span class="line">cokkie用于本地保存文件，减少服务端负担。用于认证信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="三、HTTP报文"><a href="#三、HTTP报文" class="headerlink" title="三、HTTP报文"></a>三、HTTP报文</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">报文主体用于描述传输文件</span><br><span class="line">实体主体表示传输具体内容，可在传输中编码(压缩)</span><br><span class="line">大文件分割发送</span><br></pre></td></tr></table></figure>
-<h3 id="四、HTTP状态码"><a href="#四、HTTP状态码" class="headerlink" title="四、HTTP状态码"></a>四、HTTP状态码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">	|--------------------------------------------------------------------</span><br><span class="line">  2XX	|200 OK</span><br><span class="line">success	|204 No Content(无资源返回|无需更新客户端资源)</span><br><span class="line">	|206 Partial Content(请求范围)</span><br><span class="line">	|--------------------------------------------------------------------</span><br><span class="line">  	|301 Moved Permanently(URI改变，更新书签，资源最后忘加&quot;/&quot;，返回301)</span><br><span class="line">	|302 Found(临时移动资源，不更新书签)</span><br><span class="line">  3XX	|303 See Other(与302相似,只是方法固定是GET)</span><br><span class="line">	|304 Not Modifiied(?)</span><br><span class="line">	|307 Temporary Redirect==302</span><br><span class="line">	|---------------------------------------------------------------------</span><br><span class="line">  4XX	|400 Bad Request (语法错误)</span><br><span class="line">	|401 Unauthorized(寻求认证)</span><br><span class="line">	|403 Forbidden(权限问题等)</span><br><span class="line">	|404 Not Found(无资源)</span><br><span class="line">	|---------------------------------------------------------------------</span><br><span class="line">  5XX	|501 Internal Server Error(服务器内部错误)</span><br><span class="line">	|503 Service Unavailable(超负载||维护)</span><br><span class="line">	|---------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
-<h3 id="五、协作Web服务器"><a href="#五、协作Web服务器" class="headerlink" title="五、协作Web服务器"></a>五、协作Web服务器</h3><pre><code class="txt"></code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/22/renwu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/22/renwu/" class="post-title-link" itemprop="url">jS自测题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-22 00:00:00" itemprop="dateCreated datePublished" datetime="2019-11-22T00:00:00+08:00">2019-11-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-01 09:51:29" itemprop="dateModified" datetime="2019-12-01T09:51:29+08:00">2019-12-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">a.b = <span class="number">1</span></span><br><span class="line">a.prototype.b = <span class="number">2</span></span><br><span class="line">a.prototype.c = <span class="number">3</span></span><br><span class="line">a.prototype.d = <span class="number">4</span></span><br><span class="line"><span class="built_in">console</span>.log(a.b)	<span class="comment">//-&gt;1 </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> a().b)	<span class="comment">//-&gt;2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> a()</span><br><span class="line">foo.c = <span class="number">5</span></span><br><span class="line"><span class="built_in">console</span>.log(foo.c) 	<span class="comment">//-&gt;5</span></span><br><span class="line"><span class="built_in">console</span>.log(foo.d)	<span class="comment">//-&gt;4</span></span><br></pre></td></tr></table></figure>
-<code>var a=function(){}</code>是一个隐式函数定义，则a会有一个原型对象。<code>a.b=1</code>在a中存放了一个值为1的属性。<code>a.prototype.X=Y</code>可以向原型中添加属性。a.b访问了a中的属性，所以结果是<code>1</code>。而<code>new a().b</code>用<code>new</code>创建了新对象与原来的a无关，所以<code>new a().b</code>的b!=<code>a.b=1</code>的b。新对象中无b，向它的原型中搜索该值，结果为2。下面同上。</li>
-</ol>
-<hr>
-<ol start="2">
-<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.a = <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    a:<span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = <span class="keyword">new</span> Foo()</span><br><span class="line"><span class="built_in">console</span>.log(bar.a)	<span class="comment">//-&gt;2</span></span><br></pre></td></tr></table></figure>
-<code>var bar = new Foo()</code>调用了<code>Foo</code>,返回了一个对象<code>{a:2}</code>,该对象a属性的值为2,所以输出为2</li>
-</ol>
-<hr>
-<ol start="3">
-<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> map = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"toString"</span> <span class="keyword">in</span> map); <span class="comment">//false</span></span><br><span class="line"><span class="keyword">var</span> map = <span class="built_in">Object</span>.create(&#123;<span class="attr">a</span>:<span class="number">1</span>&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"toString"</span> <span class="keyword">in</span> map);	<span class="comment">//true </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"a"</span> <span class="keyword">in</span> map); 	<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-<code>Object.create(null);</code>创建了函数的原型(null),null中无<code>&quot;tostring&quot;</code>,返回<code>false</code>。而<code>{a:1}</code>有原型，在查询<code>&quot;tostring&quot; in map</code>时，顺着原型链查到了<code>&quot;tostring&quot;</code>，结果为<code>true</code>,<code>&quot;a&quot; in map</code>直接被查询到，返回<code>true</code>。</li>
-</ol>
-<hr>
-<ol start="4">
-<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(obj).slice(<span class="number">8</span>,<span class="number">-1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj=&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> obj) <span class="comment">//object</span></span><br><span class="line"><span class="built_in">console</span>.log(foo(obj))	<span class="comment">//Object</span></span><br></pre></td></tr></table></figure>
-<code>Object</code>对象的<code>prototype</code>原型的<code>toString</code>方法,将this指向obj并调用。取输出结果的第八位至倒数第一位。即obj的数据类型</li>
-</ol>
-<hr>
-<ol start="5">
-<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;</span><br><span class="line">a.bar = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(a, <span class="string">"foo"</span>,&#123; <span class="attr">value</span>: <span class="string">"hi"</span>&#125;);</span><br><span class="line"><span class="comment">//成功创i建 foo in a =true</span></span><br><span class="line"><span class="comment">//默认configurable:false,无法删除无法修改</span></span><br><span class="line"><span class="comment">//默认enumerable:false,无法被枚举(遍历)</span></span><br><span class="line"><span class="comment">//默认writable:false,无法被修改</span></span><br><span class="line"><span class="comment">//a.hasOwnProperty('foo')=true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">delete</span> a.foo) <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">delete</span> a.bar) <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">a.foo = <span class="string">"world"</span></span><br><span class="line"><span class="built_in">console</span>.log(a.foo)        <span class="comment">//hi</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> a)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key);       <span class="comment">//output nothing</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"foo"</span> <span class="keyword">in</span> a);  <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"bar"</span> <span class="keyword">in</span> a);  <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<hr>
-<ol start="6">
-<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//作用域不在函数内</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    a = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//变量,不是属性</span></span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</span><br><span class="line">    <span class="keyword">var</span> a;</span><br><span class="line"><span class="comment">//a相同么？</span></span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line"><span class="comment">//0</span></span><br><span class="line"><span class="comment">//undefined,this-&gt;global</span></span><br><span class="line"><span class="comment">//0</span></span><br><span class="line"><span class="keyword">new</span> test();</span><br><span class="line"><span class="comment">//0</span></span><br><span class="line"><span class="comment">//undefined,this-&gt;test&#123;&#125;</span></span><br><span class="line"><span class="comment">//0</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<hr>
-<ol start="7">
-<li><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'1'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">foo.f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'2'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//创建f属性</span></span><br><span class="line">foo.prototype.f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//原型中创建f</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'4'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'5'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//写出下面的结果</span></span><br><span class="line">foo.f();		<span class="comment">//2</span></span><br><span class="line">f();			<span class="comment">//4,先声明变量，再声明函数，再赋值</span></span><br><span class="line">foo().f();		<span class="comment">//error,1,f-&gt;('1');</span></span><br><span class="line"><span class="keyword">new</span> foo.f();		<span class="comment">//2调用并创建对象</span></span><br><span class="line"><span class="keyword">new</span> foo().f();		<span class="comment">//3创建foo&#123;&#125;调用.f()</span></span><br><span class="line"><span class="keyword">new</span> <span class="keyword">new</span> foo().f();	<span class="comment">//3foo()中的.f()的原型--&gt;3</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -1053,12 +1040,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
