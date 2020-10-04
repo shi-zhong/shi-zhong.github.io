@@ -46,17 +46,14 @@
   };
 </script>
 
-  <meta name="description" content="将 react 配置到 github pages 上 配置 package.json 文件  homepage 为 clone 地址 前缀改为 github page 地址  地址: https:&#x2F;&#x2F;github.com&#x2F;shi-zhong&#x2F;birth.git   12345&amp;#123;  &quot;name&quot;: &quot;birth&quot;,  &quot;version&quot;: &quot;0.1.0&quot;,  &quot;homepage&quot;: &quot;ht">
-<meta property="og:type" content="article">
-<meta property="og:title" content="react 有关">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;03&#x2F;20&#x2F;react-about&#x2F;index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="LAn&#39;s BLOG">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;h5map&#x2F;index.html">
 <meta property="og:site_name" content="LAn&#39;s BLOG">
-<meta property="og:description" content="将 react 配置到 github pages 上 配置 package.json 文件  homepage 为 clone 地址 前缀改为 github page 地址  地址: https:&#x2F;&#x2F;github.com&#x2F;shi-zhong&#x2F;birth.git   12345&amp;#123;  &quot;name&quot;: &quot;birth&quot;,  &quot;version&quot;: &quot;0.1.0&quot;,  &quot;homepage&quot;: &quot;ht">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-03-20T16:00:27.629Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/20/react-about/">
+<link rel="canonical" href="http://yoursite.com/tags/h5map/">
 
 
 <script id="page-configurations">
@@ -64,11 +61,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true
+    isPost: false
   };
 </script>
 
-  <title>react 有关 | LAn's BLOG</title>
+  <title>标签: h5map | LAn's BLOG</title>
   
 
 
@@ -162,114 +159,50 @@
           <div class="content">
             
 
-  <div class="posts-expand">
-      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/react-about/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          react 有关
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h1 class="collection-header">h5map
+          <small>标签</small>
         </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 23:29:08" itemprop="dateCreated datePublished" datetime="2020-03-20T23:29:08+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 00:00:27" itemprop="dateModified" datetime="2020-03-21T00:00:27+08:00">2020-03-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+      </div>
 
       
-        <h4 id="将-react-配置到-github-pages-上"><a href="#将-react-配置到-github-pages-上" class="headerlink" title="将 react 配置到 github pages 上"></a>将 react 配置到 github pages 上</h4><ol>
-<li><p>配置 package.json 文件</p>
-<p> homepage 为 clone 地址 前缀改为 github page 地址</p>
-<p> 地址: <code>https://github.com/shi-zhong/birth.git</code></p>
-</li>
-</ol>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"birth"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</span><br><span class="line">  <span class="attr">"homepage"</span>: <span class="string">"https://shi-zhong.github.io/birth"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br></pre></td></tr></table></figure>
-
-<p>配置脚本 “predeploy”: 打包文件; “deploy”: 上传文件至github的分支</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "start": "react-scripts start",</span><br><span class="line">  "build": "react-scripts build",</span><br><span class="line">  "test": "react-scripts test",</span><br><span class="line">  "eject": "react-scripts eject",</span><br><span class="line">  "predeploy": "npm run build",</span><br><span class="line">  "deploy": "gh-pages -d build"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>安装 gh-pages</li>
-</ol>
-<p><code>npm install gh-pages --save-dev</code></p>
-<p>  gh-pages官网<a href="https://www.npmjs.com/package/gh-pages" target="_blank" rel="noopener">https://www.npmjs.com/package/gh-pages</a></p>
-<ol start="3">
-<li><p>将文件上传至github, 执行<code>npm run deploy</code></p>
-</li>
-<li><p>访问 设置的网址</p>
-</li>
-</ol>
-<h4 id="安装-react-router"><a href="#安装-react-router" class="headerlink" title="安装 react-router"></a>安装 react-router</h4><ol>
-<li><p>执行代码 <code>npm install react-router-dom</code></p>
-</li>
-<li><p>报错 <code>Unexpected end of JSON input while parsing near</code> 执行 <code>npm cache clean --force</code></p>
-</li>
-</ol>
-
+    <div class="collection-year">
+      <h1 class="collection-header">2020</h1>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-10-02T00:00:00+08:00"
+              content="2020-10-02">
+          10-02
+        </time>
+      </div>
 
-        
+      <h2 class="post-title">
+          <a class="post-title-link" href="/2020/10/02/hotMap/" itemprop="url">
+            <span itemprop="name">小地图程序带给我的痛苦</span>
+          </a>
+      </h2>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/03/18/c-yuyan/" rel="prev" title="C语言笔记">
-      <i class="fa fa-chevron-left"></i> C语言笔记
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/04/14/links/" rel="next" title="网页制作中的一些知识点(链接)">
-      网页制作中的一些知识点(链接) <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
   
 
-  </div>
+  
+
 
 
           </div>
@@ -320,7 +253,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#将-react-配置到-github-pages-上"><span class="nav-number">1.</span> <span class="nav-text">将 react 配置到 github pages 上</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装-react-router"><span class="nav-number">2.</span> <span class="nav-text">安装 react-router</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -164,6 +164,242 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/04/gesture/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/04/gesture/" class="post-title-link" itemprop="url">gesture</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-10-04 01:25:28 / 修改时间：02:10:10" itemprop="dateCreated datePublished" datetime="2020-10-04T01:25:28+08:00">2020-10-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>对地图进行操作的时候我们经常会用到一些手势,于是我查了点手势相关的信息简单介绍</p>
+<p>常用的 HTML5 手势可以分为两类，单点手势和两点手势。<br>单点手势有 tap（单击），double tap（双击），long tap（长按），swipe（挥），move（移动）。<br>两点手势有 pinch（缩放），rotate（旋转）。</p>
+<p>简单提一下触摸的三个API touchstart，touchmove，touchend 还有一个 touchcancel是在不小心失去手机焦点时的处理机制,可以自行考虑. 在调用三个API的时候,会用到一个事件e, 在e里面会有一个数组属性叫做 touches, 里面包含了当时的所有触点(手指) 我们需要做的就是对这些已经给出的信息进行分析,并对视图进行修改;</p>
+<p>移动过于简单,就是在每次touchmove事件发生时，把两个位移点之间的坐标位置相减，就可以了。<br>在手机中,浏览器经常会自带一些后退刷新的手势,而这些手势容易和自定义的移动冲突,降低用户体验,所以在h5map中,我使用的是浏览器自带的滚动条来实现移动,使用两个div和一些css样式来隐藏滚动条.</p>
+<p>单击（tap）,double tap（双击），long tap（长按），从原理上来讲都差不多, 就是检测手指和屏幕触摸的时间.</p>
+<p>在 touchstart 发生时进入单击检测，只有一个接触点。没有发生 touchmove 事件或者 touchmove 在一个很小的范围,我们不能保证用户精准利落的完成点下抬起的动作。</p>
+<p>touchend 发生在 touchstart后的很短时间内, 单击事件从开始到结束是很快的。</p>
+<p>我们需要记录时间 自然就联想到我们的Date对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">getTime() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  <span class="keyword">const</span> touchEvent = &#123;</span><br><span class="line">    startX: <span class="number">0</span>,</span><br><span class="line">    startY: <span class="number">0</span>,</span><br><span class="line">    startTime: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">    <span class="comment">//记录touch开始的位置</span></span><br><span class="line">    touchEvent.startX = e.touches[<span class="number">0</span>].pageX;</span><br><span class="line">    touchEvent.startY = e.touches[<span class="number">0</span>].pageY;</span><br><span class="line">    <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">//多点监测</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//记录touch开始的时间</span></span><br><span class="line">      touchEvent.startTime = <span class="keyword">this</span>.getTime();</span><br><span class="line">    &#125;</span><br><span class="line">    ...setState...</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  <span class="comment">//记录手指移动的位置</span></span><br><span class="line">  ...getState...</span><br><span class="line">  touchEvent.moveX = e.touches[<span class="number">0</span>].pageX;</span><br><span class="line">  touchEvent.moveY = e.touches[<span class="number">0</span>].pageY;</span><br><span class="line">  ...setState...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchEnd(e) &#123;</span><br><span class="line">  <span class="keyword">let</span> timestamp = <span class="keyword">this</span>.getTime();</span><br><span class="line">  <span class="keyword">if</span>(touchEvent.moveX !== <span class="literal">null</span> &amp;&amp; <span class="built_in">Math</span>.abs(touchEvent.moveX - touchEvent.startX) &gt; <span class="number">10</span> ||</span><br><span class="line">    touchEvent.moveY !== <span class="literal">null</span> &amp;&amp; <span class="built_in">Math</span>.abs(touchEvent.moveY - touchEvent.startY) &gt; <span class="number">10</span>) &#123;</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//手指移动的位移要小于10像素并且手指和屏幕的接触时间要短语500毫秒</span></span><br><span class="line">    <span class="keyword">if</span>(timestamp - touchEvent.startTime &lt; <span class="number">500</span>) &#123;</span><br><span class="line">      <span class="comment">// 执行点击(tap)事件</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br>长按（long press）<br>长按和单击差不多,只是在屏幕上停留的时间比较久而已.<br>我们可以这样分解：在 touchstart 发生后的很长一段时间内，如果没有发生 touchmove 或者 touchend 事件，那么就触发长按手势。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">// 同上</span></span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.longPressTimeout = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.emitEvent(<span class="string">'onLongPress'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchEnd(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样将单击的事件阈值放大也可以实现这个功能,单击时,点击事件不能超过,而长按是不少于;</p>
+<p>双击（double tap）</p>
+<p>双击事件是一个手指的行为。所以在 touchstart 时，我们要判断此时屏幕有几个接触点。</p>
+<p>双击事件本质是两次快速的单击。也即是说，两次点击的间隔时间很短,一般来说,两个单机事件的位置也相差不大。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.previousTouchPoint) &#123;</span><br><span class="line">      <span class="comment">//两次相邻的touchstart之间距离要小于10，同时时间间隔小于300ms</span></span><br><span class="line">      <span class="keyword">if</span>( <span class="built_in">Math</span>.abs(touchEvent.startX -<span class="keyword">this</span>.previousTouchPoint.startX) &lt; <span class="number">10</span>  &amp;&amp;</span><br><span class="line">          <span class="built_in">Math</span>.abs(touchEvent.startY - <span class="keyword">this</span>.previousTouchPoint.startY) &lt; <span class="number">10</span> &amp;&amp; </span><br><span class="line">          <span class="built_in">Math</span>.abs(touchEvent.startTime - <span class="keyword">this</span>.previousTouchTime) &lt; <span class="number">300</span>) &#123;</span><br><span class="line">            <span class="comment">// 执行双击事件</span></span><br><span class="line">            <span class="keyword">this</span>.emitEvent(<span class="string">'onDoubleTap'</span>);</span><br><span class="line">          &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//保存上一次touchstart的时间和位置信息</span></span><br><span class="line">  ...setstate...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>缩放（pinch）</p>
+<p>缩放是两个手指的行为，需要检测屏幕上是否有两个接触点。<br>缩放比例的量化，是通过两次缩放行为之间的距离的比值得到的.<br>所以缩放的核心是获取两个接触点之间的直线距离。</p>
+<p>touches给出的坐标可以让我们简单的算出两点之间的距离</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">onTouchStart(e) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> point1 = e.touches[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> point2 = e.touches[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">this</span>.touchDistance = <span class="keyword">this</span>.getDistance(point1, point2);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在onTouchStart函数中获取并且保存 touchstart 发生时两个接触点之间的距离。</span></span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> xLen = <span class="built_in">Math</span>.abs(e.touches[<span class="number">0</span>].pageX - e.touches[<span class="number">1</span>].pageX);</span><br><span class="line">      <span class="keyword">let</span> yLen = <span class="built_in">Math</span>.abs(e.touches[<span class="number">1</span>].pageY - e.touches[<span class="number">1</span>].pageY);</span><br><span class="line">      <span class="keyword">let</span> touchDistance = <span class="keyword">this</span>.getDistance(xLen,yLen);</span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.touchDistance) &#123;</span><br><span class="line">          <span class="keyword">let</span> pinchScale = touchDistance / <span class="keyword">this</span>.touchDistance</span><br><span class="line">          <span class="keyword">this</span>.emitEvent(<span class="string">'onPinch'</span>,&#123;<span class="attr">scale</span>:pinchScale - <span class="keyword">this</span>.previousPinchScale&#125;);</span><br><span class="line">          <span class="keyword">this</span>.previousPinchScale = pinchScale;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">   ...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>旋转(rotate)<br>旋转手势需要检测两个比较重要的值，一是旋转的角度，二是旋转的方向（顺时针或逆时针）。</p>
+<p><a href="https://blog.csdn.net/llll789789/article/details/98963341" target="_blank" rel="noopener">引用原文</a><br>首先，需要获取向量的旋转方向和角度。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这两个方法属于向量计算</span></span><br><span class="line"></span><br><span class="line">   getRotateDirection(vector1,vector2) &#123;</span><br><span class="line">    <span class="keyword">return</span> vector1.x * vector2.y - vector2.x * vector1.y;</span><br><span class="line">  &#125;  </span><br><span class="line">  getRotateAngle(vector1,vector2) &#123;</span><br><span class="line">    <span class="keyword">let</span> direction = <span class="keyword">this</span>.getRotateDirection(vector1,vector2);</span><br><span class="line">    direction = direction &gt; <span class="number">0</span> ? <span class="number">-1</span> : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> len1 = <span class="keyword">this</span>.getDistance(vector1.x,vector1.y);</span><br><span class="line">    <span class="keyword">let</span> len2 = <span class="keyword">this</span>.getDistance(vector2.x,vector2.y);</span><br><span class="line">    <span class="keyword">let</span> mr = len1 * len2;</span><br><span class="line">    <span class="keyword">if</span>(mr === <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> dot = vector1.x * vector2.x + vector1.y * vector2.y;</span><br><span class="line">    <span class="keyword">let</span> r = dot / mr;</span><br><span class="line">    <span class="keyword">if</span>(r &gt; <span class="number">1</span>) r = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(r &lt; <span class="number">-1</span>) r = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.acos(r) * direction * <span class="number">180</span> / <span class="built_in">Math</span>.PI;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，我们在手指发生移动时，调用获取旋转方向和角度的方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  ...  </span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.touchVector = &#123;</span><br><span class="line">       x: point2.pageX - touchEvent.startX,</span><br><span class="line">       y: point2.pageY - touchEvent.startY</span><br><span class="line">     &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span>.touchVector) &#123;</span><br><span class="line">        <span class="keyword">let</span> vector = &#123;</span><br><span class="line">          x: e.touches[<span class="number">1</span>].pageX - e.touches[<span class="number">0</span>].pageX,</span><br><span class="line">          y: e.touches[<span class="number">1</span>].pageY - e.touches[<span class="number">0</span>].pageY</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">let</span> angle = <span class="keyword">this</span>.getRotateAngle(vector,<span class="keyword">this</span>.touchVector);</span><br><span class="line">        <span class="comment">// 将角度(方向由正负决定)传入函数执行对应操作</span></span><br><span class="line">        <span class="keyword">this</span>.emitEvent(<span class="string">'onRotate'</span>,&#123;angle&#125;);</span><br><span class="line">        <span class="keyword">this</span>.touchVector.x = vector.x;</span><br><span class="line">        <span class="keyword">this</span>.touchVector.y = vector.y;</span><br><span class="line">      &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对手势的判断本质上就是对一个个点的判断, 有了办法获取手机上的点,通过某种计算就可以得到我们想要的结果.我在这次的h5项目中对移动的判断还添加了双指移动和三指移动,后来因为两个原因删除了,第一个是手机浏览器自带的手势功能会极大影响我写的移动逻辑,第二个就是移动的效果并不是那么的流畅,怎么考虑都是原生的滚动条占优势. 但本质的判断就是通过两个指头或者三个指头,算出一个基准点,因为算基准点的算法是一样的,所以用这个标准就可以去衡量地图的移动.</p>
+<p>我就用三个指头两两距离的均值来作为缩放的基准,三个指头三角形的重心作为移动的基准点,在缩放的同时进行移动,大家也可以根据自己的想法组合数据,达到自己想要的效果.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/02/hotMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/02/hotMap/" class="post-title-link" itemprop="url">小地图程序带给我的痛苦</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-02T00:00:00+08:00">2020-10-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-04 01:25:03" itemprop="dateModified" datetime="2020-10-04T01:25:03+08:00">2020-10-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://gzsmap.ccnu.edu.cn" target="_blank" rel="noopener">h5map</a></p>
+<p>一张简单的地图需要几个功能,移动地图,点击标记,放大缩小…</p>
+<p>不管移动地图,先来说一说对地图的标记和点击;</p>
+<p>对于不同的手机,屏幕有不同的大小,想要适配手机,就必须空余出手机参数,让浏览器填补参数,自动计算.这些都是题外话,和我想说的没有什么太大关系.这篇想讲的是图片的分区点击.</p>
+<p>在接到这个项目的时候,我第一个想到的就是找一个和图片一样大的div元素,把这个div元素覆盖到这张图片上面,再在这个div中放入若干个其他的div,给里面的元素设置点击事件,点击之后就在视图层添加一个标记.这些div的布局,最简单的,第一个想到的就是绝对定位,当然使用transform: trnaslate()也是一样的.这个方法有一个优点,可以使用border-radius属性让点击区域拥有圆角,但也有一个缺点,对于精细的不规则区域来说,这个方法想要成功,就要用很多个小的div去拼接成一个大的点击区域.</p>
+<p>并不是特别清楚一个真正的map应该怎么做,但是总是只用div让我觉得自己呆呆的,于是我又去搜了另一个东西 ———— 图片热区 <code>&lt;area&gt;</code>标签 还有 <code>&lt;map&gt;</code>标签, 这个标签的英文名让我觉得这个才是我需要的;</p>
+<p>先简单的介绍一下这个元素</p>
+<p>area 顾名思义 区域; 是用来定义点击的区域的; 他有几个属性</p>
+<p><code>&lt;area shape=&quot;&quot; coords=&quot;&quot; href =&quot;&quot; alt=&quot;&quot; /&gt;</code></p>
+<p>shape coords href alt, 还支持html的全局属性和事件属性;</p>
+<p>shape 用来指定区域的形状 有三个值 ‘rect’, ‘circle’, ‘poly’ 矩形区域, 圆形区域和不规则区域;<br>coords 用来指定区域的位置;<br>href 指定点击之后的链接<br>alt 替代文本</p>
+<p>rect 对应的 coords 是 “number1, number2, number3, number4” 分别代表矩形的一组对角坐标,前两个一个角,后两个一个角;<br>circle 对应的 coords 是 “x:number1, y: number2, radius: number3” 对应圆的中心点坐标和圆的半径;<br>poly 对应的 coords 是一连串的坐标”x1,y1,x2,y2,x3,y3…” 浏览器会将最后一个点和第一个点自动闭合.</p>
+<p><code>&lt;a&gt;</code>标签也支持这两个属性</p>
+<p>如果某个 area 标签中的坐标和其他区域发生了重叠，会优先采用最先出现的 area 标签。浏览器会忽略超过图像边界范围之外的坐标;</p>
+<p>有了点击的区域,那需要将 图片和区域连接起来,这里就需要另一个:<code>&lt;Map&gt;</code>标签;<br>  <code>&lt;map name=&quot;&quot; id=&quot;&quot;&gt;</code><br>  主要就是这两个属性,在 <a href="https://www.w3school.com.cn/tags/tag_map.asp" target="_blank" rel="noopener">W3school</a>中写到”<code>&lt;img&gt;</code>中的 usemap 属性可引用 <code>&lt;map&gt;</code> 中的 id 或 name 属性（取决于浏览器），所以我们应同时向 <code>&lt;map&gt;</code> 添加 id 和 name 属性。”<br>所以在填写时需要将两个一并填上.</p>
+<p>上面提到了 usemap 这个就是 链接图片和热区的必要属性;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"#"</span> <span class="attr">alt</span>=<span class="string">"#"</span> <span class="attr">usemap</span>=<span class="string">"#map"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">map</span> <span class="attr">name</span>=<span class="string">"map"</span> <span class="attr">id</span>=<span class="string">"map"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">area</span> <span class="attr">shape</span>=<span class="string">"rect"</span> <span class="attr">coords</span>=<span class="string">"0,0,1,1"</span> <span class="attr">href</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">area</span> <span class="attr">shape</span>=<span class="string">"rect"</span> <span class="attr">coords</span>=<span class="string">"1,1,2,2"</span> <span class="attr">href</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">area</span> <span class="attr">shape</span>=<span class="string">"rect"</span> <span class="attr">coords</span>=<span class="string">"2,2,3,3"</span> <span class="attr">href</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">area</span> <span class="attr">shape</span>=<span class="string">"rect"</span> <span class="attr">coords</span>=<span class="string">"3,3,4,4"</span> <span class="attr">href</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个就是一个完整的例子.实际的展示可以在W3School中试验.</p>
+<p>我们只要指定每个area元素的点击事件,浏览器就会根据绑定的事件进行处理. 功能已经实现,数据的处理就看个人的把握了.在标记地图点的时候一定要记得把名字起好,不然校对的时候会很麻烦.</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/26/note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/26/note/" class="post-title-link" itemprop="url">note</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-26 16:22:21 / 修改时间：17:58:30" itemprop="dateCreated datePublished" datetime="2020-07-26T16:22:21+08:00">2020-07-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<p>title: note<br>date: 2020.07.26<br>tag:  note</p>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/23/share3-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -749,227 +985,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/new-term/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/05/new-term/" class="post-title-link" itemprop="url">新学期班会</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-03-05 21:58:00 / 修改时间：23:37:43" itemprop="dateCreated datePublished" datetime="2020-03-05T21:58:00+08:00">2020-03-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="学习小节"><a href="#学习小节" class="headerlink" title="学习小节"></a>学习小节</h4><p>&emsp;&emsp;度过了一个学期之后，对大学的概念愈加清晰。大学说是很空的吧，他也有很多的课程需要学习；说大学任务很紧，比起高中来说，课程表空很多了，有很多时间是由我们自己来决定使用的。想想自己在寝室里的日子，能不出门就不出门，出门也就上课吃饭。在寝室里，大部分时间都是用来与计算机玩耍，正事也是有做，但游戏也玩的不少，时间的分配上还是要更加合理一点。玩归玩，至少课程不能落下。不能只沉浸在大学的自由里面，毕竟大学还是学习的地方，挂科还是很难受的，平时一定要时间花上去。学习是首位，规划好学习与放松，认真听讲，这样就不用连夜复习，在考试周之前疯狂复习了。<br>&emsp;&emsp;大学里我们也不仅仅学习专业知识(虽然计算机的部分这学期还没开始),我们现在不在家里面，不是躺在床上，醒来就有饭吃；洗完澡把衣服一丢，第二天洗好的衣服就会挂在阳台上。大学里我们也要学会照顾自己，学会掌握生活的技能，有空打扫干净自己的位置，勤丢垃圾，学会早上自觉地收拾好床铺，不要只是把衣服丢在角落里，等着洗衣机空出来，偶尔也要自己洗衣洗衣服，拖拖地，把寝室的氛围搞好。发展一下自己的兴趣，未未来做做准备。</p>
-<p>&emsp;&emsp;所以在家还是很舒服的，抓紧享受，回去很多事就要自己做了 =-=</p>
-<hr>
-<h4 id="寒假见闻"><a href="#寒假见闻" class="headerlink" title="寒假见闻"></a>寒假见闻</h4><p>&emsp;&emsp;寒假怎么说呢，还是很<strong><em>倒霉</em></strong>的。回到家的第二天就又出发前往贵州，先是等了一天的长途客车，结果耳机莫名其妙的<strong><em>裂开</em></strong>了。(之后它的命运也很坎坷，被我翻身压倒了，彻底裂开。)客车开了很久，窗上都是水，车内<strong><em>环境好差</em></strong>，空气又不好，还挤。路上一半<strong><em>身份证还不见</em></strong>了，<strong><em>糟糕</em></strong>死了。到了目的地还发现那不是目的地…骗我们到目的地附近的地方，就退我们那么点钱叫我们搭车，时间还刚好在客运站最后一班车出去之后。真是太巧了，太棒了(*****).然后就开始了乡下隔离，没有厕所，没有信号，房间通风很不错，凉嗖嗖的…<br>&emsp;&emsp;接下来就是拿着手机混日子，总算是可以回去了。坐的火车，票是到的那天买的，那时候还差点买不到，结果当天一节车里面都没几个人。<br>&emsp;&emsp;到家之后就一直宅家里坐自己的事情，敲敲<code>代码</code>，打打游戏，看看动漫。</p>
-<hr>
-<h4 id="线上学习情况-amp-新学期计划"><a href="#线上学习情况-amp-新学期计划" class="headerlink" title="线上学习情况&amp;新学期计划"></a>线上学习情况&amp;新学期计划</h4><ul>
-<li>线上学习<br>&emsp;&emsp;学习情况就是跟着学 =-= 这部分不知道能讲啥。基本进度跟着教师，不过有些作业还么有写。虽然有时候会卡，但基本都还好。</li>
-<li>新学期计划<br>&emsp;&emsp;计划这种东西还是很难搞得，学习这部分来说，教学进度不是我们决定的事情，能做到的就是跟上，巩固。其他的话,计划在这个学期能够多学一些技术性的东西，除了学校教的C语言课程之外，学一些关于计算机的事情，多参加一下这方面的活动之类的(不能只是一个宅男)</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/04/VBox/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/04/VBox/" class="post-title-link" itemprop="url">虚拟机安装及使用</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-02-04 00:00:00 / 修改时间：13:47:43" itemprop="dateCreated datePublished" datetime="2020-02-04T00:00:00+08:00">2020-02-04</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这里使用的虚拟机为Vbox,官网进行下载(不记得命令行)，挂载正确的ISO文件，和增强ISO文件，将光盘作为第一启动项(系统),启动，选择启动盘，安装，在资源管理里找到增强光驱，运行安装程序。重启。在启动前讲硬盘放到第一位(否则会重新安装)。<br>[感觉增强似乎没啥用，画质好像好了一丢丢   (=-=)   ]</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/CS-notes-share/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/11/CS-notes-share/" class="post-title-link" itemprop="url">CS-notes-share</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-11 16:58:28" itemprop="dateCreated datePublished" datetime="2019-12-11T16:58:28+08:00">2019-12-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-15 01:29:53" itemprop="dateModified" datetime="2019-12-15T01:29:53+08:00">2019-12-15</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="短连接AND长连接"><a href="#短连接AND长连接" class="headerlink" title="短连接AND长连接"></a>短连接AND长连接</h3><p>HTTP/1.1起默认长连接 断开连接 <code>Connection:close</code>;<br>HTTP/1.1前默认短连接 建立链接 <code>Connection:Keep-Alive</code></p>
-<h3 id="验证缓存"><a href="#验证缓存" class="headerlink" title="验证缓存"></a>验证缓存</h3><p>ETag首部字段，用于标识资源。同一个URL下会有多个不同的资源，为了区分引入了ETag。<br>ETag放入If-None-Match首部中，可用于检查资源是否有效，若有效则返回304 Not Modified。</p>
-<h3 id="范围请求"><a href="#范围请求" class="headerlink" title="范围请求"></a>范围请求</h3><p>为了避免网络中断后重复发送数据，用range指定发送数据范围<br>请求成功后服务器返回206 Partial Content 状态码</p>
-<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>HTTP缺陷:</p>
-<ol>
-<li>明文通信，可能被窃听</li>
-<li>身份易被伪装</li>
-<li>报文有风险被篡改</li>
-</ol>
-<p>HTTPS 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）通信，再由 SSL 和 TCP 通信，也就是说 HTTPS 使用了隧道进行通信。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">		http	   https</span><br><span class="line">	客户端--------&gt;SSL--------&gt;服务器</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">#### SSL</span><br><span class="line">SSL是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层与应用层之间对网络连接进行加密。</span><br><span class="line">1）认证用户和服务器，确保数据发送到正确的客户机和服务器；</span><br><span class="line">2）加密数据以防止数据中途被窃取；</span><br><span class="line">3）维护数据的完整性，确保数据在传输过程中不被改变。</span><br><span class="line"></span><br><span class="line">##### 流程</span><br><span class="line"></span><br><span class="line">###### 服务器认证</span><br><span class="line">```txt</span><br><span class="line">客户端	|----&gt;	发送	开始	  信息	------&gt;	|服务器</span><br><span class="line">	|&lt;----	判断	生成秘钥  响应	&lt;------	|</span><br><span class="line">	|----&gt;	生成秘钥 加密	传输	------&gt;	|</span><br><span class="line">	|&lt;----	回复秘钥 返回认证信息	&lt;------	|</span><br></pre></td></tr></table></figure>
-<p>服务器认证阶段:</p>
-<ol>
-<li>客户端向服务器发送一个开始信息“Hello”以便开始一个新的会话连接</li>
-<li>服务器根据客户的信息确定是否需要生成新的主密钥，如需要则服务器在响应客户的“Hello”信息时将包含生成主密钥所需的信息</li>
-<li>客户根据收到的服务器响应信息，产生一个主密钥，并用服务器的公开密钥加密后传给服务器</li>
-<li>服务器回复该主密钥，并返回给客户一个用主密钥认证的信息，以此让客户认证服务器。</li>
-</ol>
-<h6 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">客户端	|&lt;----		发送提问	&lt;------	|服务器</span><br><span class="line">	|----&gt;	返回数字签名和公开密钥	------&gt;	|</span><br></pre></td></tr></table></figure>
-<p>用户认证阶段:<br>在此之前，服务器已经通过了客户认证，这一阶段主要完成对客户的认证。经认证的服务器发送一个提问给客户，客户则返回（数字）签名后的提问和其公开密钥，从而向服务器提供认证。</p>
-<h4 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h4><p> 对称加密: 使用同一密钥(优:运算快;缺点:无法将密钥安全传输)<br>不对称加密:使用不同密钥(优:安全传输密钥;缺:运算速度慢)</p>
-<p>HTTPS 不对称加密密钥，再用对称密钥通信</p>
-<h4 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h4><p>通过使用 证书 来对通信方进行认证。</p>
-<p>数字证书认证机构（CA，Certificate Authority）是客户端与服务器双方都可信赖的第三方机构。</p>
-<p>服务器的运营人员向 CA 提出公开密钥的申请，CA 在判明提出申请者的身份之后，会对已申请的公开密钥做数字签名，然后分配这个已签名的公开密钥，并将该公开密钥放入公开密钥证书后绑定在一起。</p>
-<p>进行 HTTPS 通信时，服务器会把证书发送给客户端。客户端取得其中的公开密钥之后，先使用数字签名进行验证，如果验证通过，就可以开始通信了。</p>
-<h4 id="HTTPS缺点"><a href="#HTTPS缺点" class="headerlink" title="HTTPS缺点"></a>HTTPS缺点</h4><ol>
-<li>因为需要进行加密解密等过程，因此速度会更慢；</li>
-<li>需要支付证书授权的高额费用。</li>
-</ol>
-<p><a href="https://blog.csdn.net/qq_38950316/article/details/81087809" target="_blank" rel="noopener">握手</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1040,12 +1055,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
