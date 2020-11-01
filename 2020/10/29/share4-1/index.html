@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="官方github：https:&#x2F;&#x2F;github.com&#x2F;SheetJS&#x2F;js-xlsx 安装 通过npm下载 1npm install xlsx --save dist中有许多的文件,主要的文件就是 xlsx.core.min.js和xlsx.full.min.js.前者只输出了一部分功能.引入script&amp;lt;script type=&amp;quot;text&#x2F;javascript&amp;quot; sr">
+<meta name="keywords" content="js-xlsx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="share 4-1">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;10&#x2F;29&#x2F;share4-1&#x2F;index.html">
+<meta property="og:site_name" content="LAn&#39;s BLOG">
+<meta property="og:description" content="官方github：https:&#x2F;&#x2F;github.com&#x2F;SheetJS&#x2F;js-xlsx 安装 通过npm下载 1npm install xlsx --save dist中有许多的文件,主要的文件就是 xlsx.core.min.js和xlsx.full.min.js.前者只输出了一部分功能.引入script&amp;lt;script type=&amp;quot;text&#x2F;javascript&amp;quot; sr">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-10-30T15:40:56.980Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/10/29/share4-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>share 4-1 | LAn's BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LAn's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/29/share4-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          share 4-1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-29 20:26:02" itemprop="dateCreated datePublished" datetime="2020-10-29T20:26:02+08:00">2020-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-30 23:40:56" itemprop="dateModified" datetime="2020-10-30T23:40:56+08:00">2020-10-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>官方github：<a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel="noopener">https://github.com/SheetJS/js-xlsx</a></p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p> 通过npm下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install xlsx --save</span><br></pre></td></tr></table></figure>
+<p><code>dist</code>中有许多的文件,主要的文件就是 <code>xlsx.core.min.js</code>和<code>xlsx.full.min.js</code>.前者只输出了一部分功能.<br>引入script<code>&lt;script type=&quot;text/javascript&quot; src=&quot;./js/xlsx.core.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>js-xlsx 提供了一个XLS 和 XLSX对象给我们;在其内部定义了一个wb(workbook)对象,用来记录和描述一个xlsx等表格文件的内容.在里面有两个属性存储表格的文本数据: SheetNames 和 Sheets</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;Directory: &#123;…&#125;, Workbook: &#123;…&#125;, Props: &#123;…&#125;, Custprops: &#123;…&#125;, Deps: &#123;…&#125;, …&#125;</span><br><span class="line">Custprops: &#123;KSOProductBuildVer: &quot;2052-11.1.0.9505&quot;&#125;</span><br><span class="line">Deps: &#123;&#125;</span><br><span class="line">Directory: &#123;workbooks: Array(1), sheets: Array(3)…&#125;</span><br><span class="line">Props: &#123;LastAuthor: &quot;liuan&quot;, Author: &quot;wps&quot;, CreatedDate: Sat May 26 2018 19:28:00 GMT+0800 (中国标准时间)…&#125;</span><br><span class="line">SSF: &#123;0: &quot;General&quot;, 1: &quot;0&quot;, 2: &quot;0.00&quot;, 3: &quot;#,##0&quot;…&#125;</span><br><span class="line">SheetNames: (3) [&quot;Sheet1&quot;, &quot;Sheet2&quot;, &quot;Sheet3&quot;]</span><br><span class="line">Sheets: &#123;Sheet1: &#123;…&#125;, Sheet2: &#123;…&#125;, Sheet3: &#123;…&#125;&#125;</span><br><span class="line">Strings: (16) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;…]</span><br><span class="line">Styles: &#123;NumberFmt: Array(65536)…&#125;</span><br><span class="line">Themes: &#123;&#125;</span><br><span class="line">Workbook: &#123;AppVersion: Array(1), WBProps: Array(1) …&#125;</span><br><span class="line">__proto__: Object</span><br></pre></td></tr></table></figure>
+
+<h5 id="Sheet-Object"><a href="#Sheet-Object" class="headerlink" title="Sheet Object"></a><a href="https://github.com/SheetJS/sheetjs#worksheet-object" target="_blank" rel="noopener">Sheet Object</a></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Sheet1:</span><br><span class="line">!merges: (7) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;]</span><br><span class="line">!ref: &quot;A1:H45&quot;</span><br><span class="line">A1: &#123;t: &quot;s&quot;, v: &quot;全局bug&quot;, r: &quot;&lt;t&gt;&lt;/t&gt;&quot;, h: &quot;全局bug&quot;, w: &quot;全局bug&quot;&#125;</span><br><span class="line">A2: &#123;t: &quot;n&quot;, v: &quot;&quot;&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>主要看Sheet里面的属性 字母数字的组合代表了一个普通单元格,!开头的对象则记录了表格的特殊信息,例如 !ref记录了sheet表格的范围,!merges记录了单元格的合并信息,还有!rows/!cols…</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// end ,start, column, row</span></span><br><span class="line"><span class="comment">// e: 结束位置的单元格坐标</span></span><br><span class="line"><span class="comment">// start from 0</span></span><br><span class="line"><span class="comment">// B5 &#123; r: 4, c: 1&#125;</span></span><br><span class="line">&#123;</span><br><span class="line">  e:&#123; <span class="attr">c</span>: ?, <span class="attr">r</span>: ?&#125;,</span><br><span class="line">  s:&#123; <span class="attr">c</span>: ?, <span class="attr">r</span>: ?&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="单元格对象"><a href="#单元格对象" class="headerlink" title="单元格对象"></a>单元格对象</h5><p>每一个单元格是一个对象（Cell Object），主要有t、v、r、h、w等字段（详见这里）：</p>
+<p>v：表示原始值；<br>w：格式化后的内容;<br>t：表示内容类型，s:string，n:nmber，b:boolean，d:date, e:error, z:blank stub..<br>f：表示公式，如B2+B3；<br>h：HTML内容;<br>r：富文本内容rich text;<br>s: 单元格样式或主题(if applicable)</p>
+<h3 id="XLSX-对象"><a href="#XLSX-对象" class="headerlink" title="XLSX 对象"></a>XLSX 对象</h3><p>xlsx对象提供给我们了一系列的函数和工具主要的就是utils, read 和 write, utils提供了一系列的工具函数来帮助我们进行数据的转换,readFile/writeFile…都是在读写两个函数的基础上进行了包装. 在官方文档中对很多内容都进行了解释.</p>
+<h5 id="utils"><a href="#utils" class="headerlink" title="utils"></a>utils</h5><p>  里面的函数大致分为 四 类:编码解码/格式转换/创建新对象/设置内容;<br>  Some helper functions in XLSX.utils generate different views of the sheets:</p>
+<ul>
+<li>XLSX.utils.sheet_to_csv generates CSV</li>
+<li>XLSX.utils.sheet_to_txt generates UTF16 Formatted Text</li>
+<li>XLSX.utils.sheet_to_html generates HTML</li>
+<li>XLSX.utils.sheet_to_json generates an array of objects</li>
+<li>XLSX.utils.table_to_book generates workbook object</li>
+<li>…</li>
+</ul>
+<p>book 指的是 workbook 工作对象, 里面的sheet指的就是book中的一张表可以通过<code>XLSX.utils.book_append_sheet</code>将sheet插入到book中,对象转换类的函数都可以顾名思义,通过名自判断出对应的效果. </p>
+<h5 id="Parsing-functions"><a href="#Parsing-functions" class="headerlink" title="Parsing functions"></a><a href="https://github.com/SheetJS/sheetjs#parsing-options" target="_blank" rel="noopener">Parsing functions</a></h5><p>XLSX.read(data, read_opts) attempts to parse data.<br>XLSX.readFile(filename, read_opts) attempts to read filename and parse.</p>
+<h5 id="Writing-functions"><a href="#Writing-functions" class="headerlink" title="Writing functions"></a><a href="https://github.com/SheetJS/sheetjs#writing-options" target="_blank" rel="noopener">Writing functions</a></h5><p>XLSX.write(wb, write_opts) attempts to write the workbook wb<br>XLSX.writeFile(wb, filename, write_opts) attempts to write wb to filename.<br>XLSX.writeFileAsync(filename, wb, o, cb) attempts to write wb to filename. </p>
+<p>例子 :<br>读取数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readWorkbookFromLocalFile</span>(<span class="params">file, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">  reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data = e.target.result;</span><br><span class="line">    <span class="keyword">var</span> workbook = XLSX.read(data, &#123;</span><br><span class="line">      type: <span class="string">'binary'</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">if</span> (callback) callback(workbook);</span><br><span class="line">  &#125;;</span><br><span class="line">  reader.readAsBinaryString(file);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>写入数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = XLSX.utils.table_to_sheet(<span class="built_in">document</span>.getElementById(<span class="string">"table"</span>))</span><br><span class="line"><span class="keyword">const</span> wb = XLSX.utils.book_new();</span><br><span class="line">XLSX.utils.book_append_sheet(<span class="number">90</span> wb, a, <span class="string">'Sheet1'</span>)</span><br><span class="line">XLSX.writeFile(wb, <span class="string">'sheet.xlsx'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>拿<code>aoa_to_sheet</code>函数为例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aoa = [</span><br><span class="line">  <span class="comment">// 特别注意合并的地方后面预留2个null</span></span><br><span class="line">	[<span class="string">'主要信息'</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="string">'其它信息'</span>], </span><br><span class="line">	[<span class="string">'姓名'</span>, <span class="string">'性别'</span>, <span class="string">'年龄'</span>, <span class="string">'注册时间'</span>],</span><br><span class="line">	[<span class="string">'张三'</span>, <span class="string">'男'</span>, <span class="number">18</span>, <span class="keyword">new</span> <span class="built_in">Date</span>()],</span><br><span class="line">	[<span class="string">'李四'</span>, <span class="string">'女'</span>, <span class="number">22</span>, <span class="keyword">new</span> <span class="built_in">Date</span>()]</span><br><span class="line">];</span><br><span class="line"><span class="keyword">var</span> sheet = XLSX.utils.aoa_to_sheet(aoa);</span><br><span class="line">sheet[<span class="string">'!merges'</span>] = [</span><br><span class="line">	<span class="comment">// 设置A1-C1的单元格合并</span></span><br><span class="line">    &#123;<span class="attr">s</span>: &#123;<span class="attr">r</span>: <span class="number">0</span>, <span class="attr">c</span>: <span class="number">0</span>&#125;, <span class="attr">e</span>: &#123;<span class="attr">r</span>: <span class="number">0</span>, <span class="attr">c</span>: <span class="number">2</span>&#125;&#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>更多参考官方文档</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/js-xlsx/" rel="tag"># js-xlsx</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/04/gesture/" rel="prev" title="gesture">
+      <i class="fa fa-chevron-left"></i> gesture
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/30/share4-2/" rel="next" title="share4-2">
+      share4-2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Sheet-Object"><span class="nav-number">2.1.</span> <span class="nav-text">Sheet Object</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单元格对象"><span class="nav-number">2.2.</span> <span class="nav-text">单元格对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XLSX-对象"><span class="nav-number"></span> <span class="nav-text">XLSX 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#utils"><span class="nav-number">0.1.</span> <span class="nav-text">utils</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Parsing-functions"><span class="nav-number">0.2.</span> <span class="nav-text">Parsing functions</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Writing-functions"><span class="nav-number">0.3.</span> <span class="nav-text">Writing functions</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">LAn</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LAn</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

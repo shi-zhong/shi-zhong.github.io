@@ -53,7 +53,7 @@
 <meta property="og:site_name" content="LAn&#39;s BLOG">
 <meta property="og:description" content="对地图进行操作的时候我们经常会用到一些手势,于是我查了点手势相关的信息简单介绍 常用的 HTML5 手势可以分为两类，单点手势和两点手势。单点手势有 tap（单击），double tap（双击），long tap（长按），swipe（挥），move（移动）。两点手势有 pinch（缩放），rotate（旋转）。 简单提一下触摸的三个API touchstart，touchmove，touchend">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-10-03T18:10:10.504Z">
+<meta property="og:updated_time" content="2020-10-15T04:41:39.690Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://yoursite.com/2020/10/04/gesture/">
@@ -189,10 +189,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-10-04 01:25:28 / 修改时间：02:10:10" itemprop="dateCreated datePublished" datetime="2020-10-04T01:25:28+08:00">2020-10-04</time>
+              <time title="创建时间：2020-10-04 01:25:28" itemprop="dateCreated datePublished" datetime="2020-10-04T01:25:28+08:00">2020-10-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-15 12:41:39" itemprop="dateModified" datetime="2020-10-15T12:41:39+08:00">2020-10-15</time>
+              </span>
 
           
 
@@ -214,7 +220,8 @@
 <p>touchend 发生在 touchstart后的很短时间内, 单击事件从开始到结束是很快的。</p>
 <p>我们需要记录时间 自然就联想到我们的Date对象</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">getTime() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  <span class="keyword">const</span> touchEvent = &#123;</span><br><span class="line">    startX: <span class="number">0</span>,</span><br><span class="line">    startY: <span class="number">0</span>,</span><br><span class="line">    startTime: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">    <span class="comment">//记录touch开始的位置</span></span><br><span class="line">    touchEvent.startX = e.touches[<span class="number">0</span>].pageX;</span><br><span class="line">    touchEvent.startY = e.touches[<span class="number">0</span>].pageY;</span><br><span class="line">    <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">//多点监测</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//记录touch开始的时间</span></span><br><span class="line">      touchEvent.startTime = <span class="keyword">this</span>.getTime();</span><br><span class="line">    &#125;</span><br><span class="line">    ...setState...</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  <span class="comment">//记录手指移动的位置</span></span><br><span class="line">  ...getState...</span><br><span class="line">  touchEvent.moveX = e.touches[<span class="number">0</span>].pageX;</span><br><span class="line">  touchEvent.moveY = e.touches[<span class="number">0</span>].pageY;</span><br><span class="line">  ...setState...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchEnd(e) &#123;</span><br><span class="line">  <span class="keyword">let</span> timestamp = <span class="keyword">this</span>.getTime();</span><br><span class="line">  <span class="keyword">if</span>(touchEvent.moveX !== <span class="literal">null</span> &amp;&amp; <span class="built_in">Math</span>.abs(touchEvent.moveX - touchEvent.startX) &gt; <span class="number">10</span> ||</span><br><span class="line">    touchEvent.moveY !== <span class="literal">null</span> &amp;&amp; <span class="built_in">Math</span>.abs(touchEvent.moveY - touchEvent.startY) &gt; <span class="number">10</span>) &#123;</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//手指移动的位移要小于10像素并且手指和屏幕的接触时间要短语500毫秒</span></span><br><span class="line">    <span class="keyword">if</span>(timestamp - touchEvent.startTime &lt; <span class="number">500</span>) &#123;</span><br><span class="line">      <span class="comment">// 执行点击(tap)事件</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><br>长按（long press）<br>长按和单击差不多,只是在屏幕上停留的时间比较久而已.<br>我们可以这样分解：在 touchstart 发生后的很长一段时间内，如果没有发生 touchmove 或者 touchend 事件，那么就触发长按手势。</p>
+
+<p>长按（long press）<br>长按和单击差不多,只是在屏幕上停留的时间比较久而已.<br>我们可以这样分解：在 touchstart 发生后的很长一段时间内，如果没有发生 touchmove 或者 touchend 事件，那么就触发长按手势。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">// 同上</span></span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.longPressTimeout = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.emitEvent(<span class="string">'onLongPress'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchEnd(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>同样将单击的事件阈值放大也可以实现这个功能,单击时,点击事件不能超过,而长按是不少于;</p>
@@ -256,7 +263,10 @@
     <a href="/2020/10/02/hotMap/" rel="prev" title="小地图程序带给我的痛苦">
       <i class="fa fa-chevron-left"></i> 小地图程序带给我的痛苦
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/29/share4-1/" rel="next" title="share 4-1">
+      share 4-1 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -329,12 +339,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

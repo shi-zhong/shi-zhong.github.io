@@ -164,6 +164,204 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/30/share4-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/30/share4-2/" class="post-title-link" itemprop="url">share4-2</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-30 23:41:58" itemprop="dateCreated datePublished" datetime="2020-10-30T23:41:58+08:00">2020-10-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-01 01:26:25" itemprop="dateModified" datetime="2020-11-01T01:26:25+08:00">2020-11-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>浏览器提供了我们开发工具,我们就要好好利用,多了解一下他的功能</p>
+<p>按下F12</p>
+<h4 id="Elements"><a href="#Elements" class="headerlink" title="Elements"></a>Elements</h4><p>  这里存放着html源代码和css样式<br>  对某一个html元素右键,可以对对元素的属性进行修改.也可以直接对整个网页元素进行修改(Edit as HTML)<br>  copy可以复制当前元素的许多信息,可以复制整个元素,JS的选择路径,css…可以快速将页面移动到所选元素处,最重要的是他可以打断点,所有的断点会被写在一旁的DOM Breakpoints里,这一行的Event Listener页面，可以查看到该元素的所有监听事件。在开发中，尤其是维护其他人的代码时，会出现不了解元素对应的监听事件，这个时候，可以在这个页面中找到。这个页面不仅能看到对应的事件函数，还可以定位该函数所在的JS文件以及在该文件中的具体位置（行数），大大提高开发维护的效率。Properties 中还提示我们 $0指向我们现在选中的元素,我们可以通过<code>console.dir($0)</code>来访问这个元素的所有属性.</p>
+<p>  元素被打断点之后如果被js代码改变,页面会停止加载,方便我们查看元素属性<br>  还可以直接将元素作为全局变量进行输出, 非常便于调试</p>
+<h4 id="Console"><a href="#Console" class="headerlink" title="Console"></a>Console</h4><p>  控制台的主要工作还是输出js内部的细节以及报错等等,对于不确定的输出,也可以在这里进行尝试.<br>  $()    | 返回与指定的CSS选择器相匹配的第一个元素，等同于document.querySelector()<br>  $$()    | 返回与指定的CSS选择器相匹配的所有元素的数组，等同于document.querySelectorAll()</p>
+<p>  $x()    | 返回与指定的XPath相匹配的所有元素的数组</p>
+<h4 id="Sourcs"><a href="#Sourcs" class="headerlink" title="Sourcs"></a>Sourcs</h4><p>  再来简单的说一下断点, 断点就是开发工具提供的一种功能,可以让程序在我们指定的地方中断运行, 我们在这个时候去观察某些变量的值,函数的堆栈,这样可以让我们更加清楚在程序内部数据是如何变化流动的.这比我们反复修改程序在里面增删<code>console.log</code>高效多了</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">argu</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> b(argu + <span class="string">"2"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">argu</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> c(argu + <span class="string">"3"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params">argu</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> d(argu + <span class="string">"4"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">d</span>(<span class="params">argu</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> e(argu + <span class="string">"5"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a(<span class="string">"1"</span>));</span><br></pre></td></tr></table></figure>
+<p>  例如对上面这个js打断点 在<code>return b(argu + &quot;2&quot;)</code>打点,就可以看到argu的值是”1”<br>  还可以对断点添加条件,当符合条件时,浏览器中断运行.<br>  一侧的辅助框还可以在断点间跳动,继续运行…<br>  call stack记录了当前行的函数调用栈,可以清楚地看见函数的运行.</p>
+<h4 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h4><p>从红点开始往右<br>记录按钮 处于打开状态时会在此面板进行网络连接的信息记录，关闭后则不会记录。<br>清除按钮 清除当前的网络连接记录信息</p>
+<p>还可以对所有的请求进行相应的筛选,让我们不用在长长的列表中来回翻找.</p>
+<p>一些条件</p>
+<ul>
+<li>domain：资源所在的域(url中的域名部分)</li>
+<li>has-response-header：资源是否存在响应头</li>
+<li>is：当前时间点在执行的请求。</li>
+<li>larger-than：显示大于指定值大小规格的资源。单位是字节(B)</li>
+<li>method：使用何种HTTP请求方式。如 GET</li>
+<li>mime-type：也写作content-type，是资源类型的标识符。如 text/html</li>
+<li>scheme：协议规定。如 HTTPS</li>
+<li>set-cookie-name：服务器设置的cookies名称</li>
+<li>status-code：HTTP响应头的状态码</li>
+</ul>
+<p>能够根据时间，查看对应时间下 浏览器请求的资源信息</p>
+<p>Preserve log：是否保留日志 </p>
+<p>当选择保留日志，重新加载url当前界面时，之前请求显示的资源信息，会保留下来</p>
+<p>Disable cache：是否进行缓存</p>
+<p>当打开开发者工具时生效，打开这个开关，则页面资源不会存入缓存，可以从Status栏的状态码看文件请求状态。</p>
+<p>offline : 设置模拟速度,3G, 4G, WiFi…<br>对着请求右键也可以对相应的信息进行复制.</p>
+<p>最上面的长条记录了各个请求收到回复的时间和处理文件的时间长短</p>
+<h4 id="performance"><a href="#performance" class="headerlink" title="performance"></a>performance</h4><p>  这个选项可以记录我们的浏览动作,比如上下滚动,交互等等,与此同时,他还记录下了关于CPU的信息,可以看到FPS和NET,也就是说在这我们可以看到那些时候哪些动作是最耗费资源的,这样我们就可以对相应的部分进行优化.如果在css动画和布局的计算上面消耗了大量资源,那么对js部分的数据计算就会有影响,在进行布局是要对样式的应用有选择.</p>
+<p>  1、大开销样式计算影响响应或动画<br>　　任何会更改元素几何形状的 CSS 属性，如宽度、高度或位置；浏览器必须检查所有其他元素并重做布局。避免会触发重排的CSS属性</p>
+<p>　　2、复杂的选择器影响响应或动画<br>  嵌套选择器强制浏览器了解与所有其他元素有关的全部内容，包括父级和子级。尽量在CSS中引用只有一个类的元素</p>
+<p>由于手机cpu运算速率没有电脑高,我们也可以用电脑浏览器对手机的计算负载进行模拟</p>
+<h4 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h4><p>该面板主要是记录网站加载的所有资源信息，包括存储数据（Local Storage、Session Storage、IndexedDB、Web SQL、Cookies）、缓存数据、字体、图片、脚本、样式表等。</p>
+<p>Local Storage 如果你在开发过程中使用了local storage来存储键值对(KVPs)，那么你就可以通过Local Storage窗格来检查、新增、修改、删除这个键值对。<br>Application Cache 你可以使用Application Cache窗格去查看通过Application Cache API创建的资源。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/29/share4-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/29/share4-1/" class="post-title-link" itemprop="url">share 4-1</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-29 20:26:02" itemprop="dateCreated datePublished" datetime="2020-10-29T20:26:02+08:00">2020-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-30 23:40:56" itemprop="dateModified" datetime="2020-10-30T23:40:56+08:00">2020-10-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>官方github：<a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel="noopener">https://github.com/SheetJS/js-xlsx</a></p>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p> 通过npm下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install xlsx --save</span><br></pre></td></tr></table></figure>
+<p><code>dist</code>中有许多的文件,主要的文件就是 <code>xlsx.core.min.js</code>和<code>xlsx.full.min.js</code>.前者只输出了一部分功能.<br>引入script<code>&lt;script type=&quot;text/javascript&quot; src=&quot;./js/xlsx.core.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>js-xlsx 提供了一个XLS 和 XLSX对象给我们;在其内部定义了一个wb(workbook)对象,用来记录和描述一个xlsx等表格文件的内容.在里面有两个属性存储表格的文本数据: SheetNames 和 Sheets</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;Directory: &#123;…&#125;, Workbook: &#123;…&#125;, Props: &#123;…&#125;, Custprops: &#123;…&#125;, Deps: &#123;…&#125;, …&#125;</span><br><span class="line">Custprops: &#123;KSOProductBuildVer: &quot;2052-11.1.0.9505&quot;&#125;</span><br><span class="line">Deps: &#123;&#125;</span><br><span class="line">Directory: &#123;workbooks: Array(1), sheets: Array(3)…&#125;</span><br><span class="line">Props: &#123;LastAuthor: &quot;liuan&quot;, Author: &quot;wps&quot;, CreatedDate: Sat May 26 2018 19:28:00 GMT+0800 (中国标准时间)…&#125;</span><br><span class="line">SSF: &#123;0: &quot;General&quot;, 1: &quot;0&quot;, 2: &quot;0.00&quot;, 3: &quot;#,##0&quot;…&#125;</span><br><span class="line">SheetNames: (3) [&quot;Sheet1&quot;, &quot;Sheet2&quot;, &quot;Sheet3&quot;]</span><br><span class="line">Sheets: &#123;Sheet1: &#123;…&#125;, Sheet2: &#123;…&#125;, Sheet3: &#123;…&#125;&#125;</span><br><span class="line">Strings: (16) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;…]</span><br><span class="line">Styles: &#123;NumberFmt: Array(65536)…&#125;</span><br><span class="line">Themes: &#123;&#125;</span><br><span class="line">Workbook: &#123;AppVersion: Array(1), WBProps: Array(1) …&#125;</span><br><span class="line">__proto__: Object</span><br></pre></td></tr></table></figure>
+
+<h5 id="Sheet-Object"><a href="#Sheet-Object" class="headerlink" title="Sheet Object"></a><a href="https://github.com/SheetJS/sheetjs#worksheet-object" target="_blank" rel="noopener">Sheet Object</a></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Sheet1:</span><br><span class="line">!merges: (7) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;]</span><br><span class="line">!ref: &quot;A1:H45&quot;</span><br><span class="line">A1: &#123;t: &quot;s&quot;, v: &quot;全局bug&quot;, r: &quot;&lt;t&gt;&lt;/t&gt;&quot;, h: &quot;全局bug&quot;, w: &quot;全局bug&quot;&#125;</span><br><span class="line">A2: &#123;t: &quot;n&quot;, v: &quot;&quot;&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>主要看Sheet里面的属性 字母数字的组合代表了一个普通单元格,!开头的对象则记录了表格的特殊信息,例如 !ref记录了sheet表格的范围,!merges记录了单元格的合并信息,还有!rows/!cols…</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// end ,start, column, row</span></span><br><span class="line"><span class="comment">// e: 结束位置的单元格坐标</span></span><br><span class="line"><span class="comment">// start from 0</span></span><br><span class="line"><span class="comment">// B5 &#123; r: 4, c: 1&#125;</span></span><br><span class="line">&#123;</span><br><span class="line">  e:&#123; <span class="attr">c</span>: ?, <span class="attr">r</span>: ?&#125;,</span><br><span class="line">  s:&#123; <span class="attr">c</span>: ?, <span class="attr">r</span>: ?&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="单元格对象"><a href="#单元格对象" class="headerlink" title="单元格对象"></a>单元格对象</h5><p>每一个单元格是一个对象（Cell Object），主要有t、v、r、h、w等字段（详见这里）：</p>
+<p>v：表示原始值；<br>w：格式化后的内容;<br>t：表示内容类型，s:string，n:nmber，b:boolean，d:date, e:error, z:blank stub..<br>f：表示公式，如B2+B3；<br>h：HTML内容;<br>r：富文本内容rich text;<br>s: 单元格样式或主题(if applicable)</p>
+<h3 id="XLSX-对象"><a href="#XLSX-对象" class="headerlink" title="XLSX 对象"></a>XLSX 对象</h3><p>xlsx对象提供给我们了一系列的函数和工具主要的就是utils, read 和 write, utils提供了一系列的工具函数来帮助我们进行数据的转换,readFile/writeFile…都是在读写两个函数的基础上进行了包装. 在官方文档中对很多内容都进行了解释.</p>
+<h5 id="utils"><a href="#utils" class="headerlink" title="utils"></a>utils</h5><p>  里面的函数大致分为 四 类:编码解码/格式转换/创建新对象/设置内容;<br>  Some helper functions in XLSX.utils generate different views of the sheets:</p>
+<ul>
+<li>XLSX.utils.sheet_to_csv generates CSV</li>
+<li>XLSX.utils.sheet_to_txt generates UTF16 Formatted Text</li>
+<li>XLSX.utils.sheet_to_html generates HTML</li>
+<li>XLSX.utils.sheet_to_json generates an array of objects</li>
+<li>XLSX.utils.table_to_book generates workbook object</li>
+<li>…</li>
+</ul>
+<p>book 指的是 workbook 工作对象, 里面的sheet指的就是book中的一张表可以通过<code>XLSX.utils.book_append_sheet</code>将sheet插入到book中,对象转换类的函数都可以顾名思义,通过名自判断出对应的效果. </p>
+<h5 id="Parsing-functions"><a href="#Parsing-functions" class="headerlink" title="Parsing functions"></a><a href="https://github.com/SheetJS/sheetjs#parsing-options" target="_blank" rel="noopener">Parsing functions</a></h5><p>XLSX.read(data, read_opts) attempts to parse data.<br>XLSX.readFile(filename, read_opts) attempts to read filename and parse.</p>
+<h5 id="Writing-functions"><a href="#Writing-functions" class="headerlink" title="Writing functions"></a><a href="https://github.com/SheetJS/sheetjs#writing-options" target="_blank" rel="noopener">Writing functions</a></h5><p>XLSX.write(wb, write_opts) attempts to write the workbook wb<br>XLSX.writeFile(wb, filename, write_opts) attempts to write wb to filename.<br>XLSX.writeFileAsync(filename, wb, o, cb) attempts to write wb to filename. </p>
+<p>例子 :<br>读取数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readWorkbookFromLocalFile</span>(<span class="params">file, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">  reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data = e.target.result;</span><br><span class="line">    <span class="keyword">var</span> workbook = XLSX.read(data, &#123;</span><br><span class="line">      type: <span class="string">'binary'</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">if</span> (callback) callback(workbook);</span><br><span class="line">  &#125;;</span><br><span class="line">  reader.readAsBinaryString(file);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>写入数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = XLSX.utils.table_to_sheet(<span class="built_in">document</span>.getElementById(<span class="string">"table"</span>))</span><br><span class="line"><span class="keyword">const</span> wb = XLSX.utils.book_new();</span><br><span class="line">XLSX.utils.book_append_sheet(<span class="number">90</span> wb, a, <span class="string">'Sheet1'</span>)</span><br><span class="line">XLSX.writeFile(wb, <span class="string">'sheet.xlsx'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>拿<code>aoa_to_sheet</code>函数为例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aoa = [</span><br><span class="line">  <span class="comment">// 特别注意合并的地方后面预留2个null</span></span><br><span class="line">	[<span class="string">'主要信息'</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="string">'其它信息'</span>], </span><br><span class="line">	[<span class="string">'姓名'</span>, <span class="string">'性别'</span>, <span class="string">'年龄'</span>, <span class="string">'注册时间'</span>],</span><br><span class="line">	[<span class="string">'张三'</span>, <span class="string">'男'</span>, <span class="number">18</span>, <span class="keyword">new</span> <span class="built_in">Date</span>()],</span><br><span class="line">	[<span class="string">'李四'</span>, <span class="string">'女'</span>, <span class="number">22</span>, <span class="keyword">new</span> <span class="built_in">Date</span>()]</span><br><span class="line">];</span><br><span class="line"><span class="keyword">var</span> sheet = XLSX.utils.aoa_to_sheet(aoa);</span><br><span class="line">sheet[<span class="string">'!merges'</span>] = [</span><br><span class="line">	<span class="comment">// 设置A1-C1的单元格合并</span></span><br><span class="line">    &#123;<span class="attr">s</span>: &#123;<span class="attr">r</span>: <span class="number">0</span>, <span class="attr">c</span>: <span class="number">0</span>&#125;, <span class="attr">e</span>: &#123;<span class="attr">r</span>: <span class="number">0</span>, <span class="attr">c</span>: <span class="number">2</span>&#125;&#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>更多参考官方文档</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/04/gesture/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -187,10 +385,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-10-04 01:25:28 / 修改时间：02:10:10" itemprop="dateCreated datePublished" datetime="2020-10-04T01:25:28+08:00">2020-10-04</time>
+              <time title="创建时间：2020-10-04 01:25:28" itemprop="dateCreated datePublished" datetime="2020-10-04T01:25:28+08:00">2020-10-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-15 12:41:39" itemprop="dateModified" datetime="2020-10-15T12:41:39+08:00">2020-10-15</time>
+              </span>
 
           
 
@@ -212,7 +416,8 @@
 <p>touchend 发生在 touchstart后的很短时间内, 单击事件从开始到结束是很快的。</p>
 <p>我们需要记录时间 自然就联想到我们的Date对象</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">getTime() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  <span class="keyword">const</span> touchEvent = &#123;</span><br><span class="line">    startX: <span class="number">0</span>,</span><br><span class="line">    startY: <span class="number">0</span>,</span><br><span class="line">    startTime: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">    <span class="comment">//记录touch开始的位置</span></span><br><span class="line">    touchEvent.startX = e.touches[<span class="number">0</span>].pageX;</span><br><span class="line">    touchEvent.startY = e.touches[<span class="number">0</span>].pageY;</span><br><span class="line">    <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">//多点监测</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//记录touch开始的时间</span></span><br><span class="line">      touchEvent.startTime = <span class="keyword">this</span>.getTime();</span><br><span class="line">    &#125;</span><br><span class="line">    ...setState...</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  <span class="comment">//记录手指移动的位置</span></span><br><span class="line">  ...getState...</span><br><span class="line">  touchEvent.moveX = e.touches[<span class="number">0</span>].pageX;</span><br><span class="line">  touchEvent.moveY = e.touches[<span class="number">0</span>].pageY;</span><br><span class="line">  ...setState...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchEnd(e) &#123;</span><br><span class="line">  <span class="keyword">let</span> timestamp = <span class="keyword">this</span>.getTime();</span><br><span class="line">  <span class="keyword">if</span>(touchEvent.moveX !== <span class="literal">null</span> &amp;&amp; <span class="built_in">Math</span>.abs(touchEvent.moveX - touchEvent.startX) &gt; <span class="number">10</span> ||</span><br><span class="line">    touchEvent.moveY !== <span class="literal">null</span> &amp;&amp; <span class="built_in">Math</span>.abs(touchEvent.moveY - touchEvent.startY) &gt; <span class="number">10</span>) &#123;</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//手指移动的位移要小于10像素并且手指和屏幕的接触时间要短语500毫秒</span></span><br><span class="line">    <span class="keyword">if</span>(timestamp - touchEvent.startTime &lt; <span class="number">500</span>) &#123;</span><br><span class="line">      <span class="comment">// 执行点击(tap)事件</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><br>长按（long press）<br>长按和单击差不多,只是在屏幕上停留的时间比较久而已.<br>我们可以这样分解：在 touchstart 发生后的很长一段时间内，如果没有发生 touchmove 或者 touchend 事件，那么就触发长按手势。</p>
+
+<p>长按（long press）<br>长按和单击差不多,只是在屏幕上停留的时间比较久而已.<br>我们可以这样分解：在 touchstart 发生后的很长一段时间内，如果没有发生 touchmove 或者 touchend 事件，那么就触发长按手势。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">// 同上</span></span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.longPressTimeout = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.emitEvent(<span class="string">'onLongPress'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchEnd(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>同样将单击的事件阈值放大也可以实现这个功能,单击时,点击事件不能超过,而长按是不少于;</p>
@@ -815,176 +1020,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/react-about/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/20/react-about/" class="post-title-link" itemprop="url">react 有关</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-20 23:29:08" itemprop="dateCreated datePublished" datetime="2020-03-20T23:29:08+08:00">2020-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-21 00:00:27" itemprop="dateModified" datetime="2020-03-21T00:00:27+08:00">2020-03-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="将-react-配置到-github-pages-上"><a href="#将-react-配置到-github-pages-上" class="headerlink" title="将 react 配置到 github pages 上"></a>将 react 配置到 github pages 上</h4><ol>
-<li><p>配置 package.json 文件</p>
-<p> homepage 为 clone 地址 前缀改为 github page 地址</p>
-<p> 地址: <code>https://github.com/shi-zhong/birth.git</code></p>
-</li>
-</ol>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"birth"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</span><br><span class="line">  <span class="attr">"homepage"</span>: <span class="string">"https://shi-zhong.github.io/birth"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br></pre></td></tr></table></figure>
-
-<p>配置脚本 “predeploy”: 打包文件; “deploy”: 上传文件至github的分支</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "start": "react-scripts start",</span><br><span class="line">  "build": "react-scripts build",</span><br><span class="line">  "test": "react-scripts test",</span><br><span class="line">  "eject": "react-scripts eject",</span><br><span class="line">  "predeploy": "npm run build",</span><br><span class="line">  "deploy": "gh-pages -d build"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>安装 gh-pages</li>
-</ol>
-<p><code>npm install gh-pages --save-dev</code></p>
-<p>  gh-pages官网<a href="https://www.npmjs.com/package/gh-pages" target="_blank" rel="noopener">https://www.npmjs.com/package/gh-pages</a></p>
-<ol start="3">
-<li><p>将文件上传至github, 执行<code>npm run deploy</code></p>
-</li>
-<li><p>访问 设置的网址</p>
-</li>
-</ol>
-<h4 id="安装-react-router"><a href="#安装-react-router" class="headerlink" title="安装 react-router"></a>安装 react-router</h4><ol>
-<li><p>执行代码 <code>npm install react-router-dom</code></p>
-</li>
-<li><p>报错 <code>Unexpected end of JSON input while parsing near</code> 执行 <code>npm cache clean --force</code></p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/c-yuyan/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/18/c-yuyan/" class="post-title-link" itemprop="url">C语言笔记</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-18 21:22:10" itemprop="dateCreated datePublished" datetime="2020-03-18T21:22:10+08:00">2020-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-19 01:03:13" itemprop="dateModified" datetime="2020-03-19T01:03:13+08:00">2020-03-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="第一章-C语言程序设计预备知识"><a href="#第一章-C语言程序设计预备知识" class="headerlink" title="第一章 C语言程序设计预备知识"></a>第一章 C语言程序设计预备知识</h4><ol>
-<li>硬件系统基本组成及工作原理<br>（1）运算器  -|<br>（2）控制器  -|-CPU<br>（3）存储器<br>（4）输入设备<br>（5）输出设备</li>
-<li>进制转换<br>小数转换：小数部分乘以2，记录整数部分，直至小数为零或者达到精度</li>
-<li>数据在计算机内部的存储<br>（1）原码 首位为符号位<br>（2）反码 首位为符号位，正数反码与原码相同，负数除首位其余按位求反<br>（3）补码 正数同原码，负数除符号位，按位求反，末位加1<br>（4）补码的计算 带符号位进行加法计算，符号位进位时，将进位的部分舍去<br>（5）ASCII 8位</li>
-<li>位运算(NOT、AND、OR、XOR)</li>
-</ol>
-<h4 id="第二章-C元语言程序设计基础"><a href="#第二章-C元语言程序设计基础" class="headerlink" title="第二章 C元语言程序设计基础"></a>第二章 C元语言程序设计基础</h4><ol>
-<li>程序语言发展<br>（1）机器语言 机器唯一识别的语言 0与1构成<br>（2）汇编语言 简单的英文字母代替特定二进制串，汇编程序用于将单词翻译成二进制串，依赖于机器硬件<br>（3）高级语言</li>
-<li>C语言发展/..</li>
-</ol>
-<h4 id="第三章-基本数据类型、运算符与表达式"><a href="#第三章-基本数据类型、运算符与表达式" class="headerlink" title="第三章 基本数据类型、运算符与表达式"></a>第三章 基本数据类型、运算符与表达式</h4><ol>
-<li>常用数据类型<br>基本数据类型（整形、字符型、实体型）、构造数据类型、指针类型、空类型</li>
-<li>常量、变量和标识符<br>（1）最长有效32位，至少8位，超长部分舍去<br>（2）大小写敏感</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1055,12 +1090,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
