@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/07/share5-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/16/share5.1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -178,7 +178,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/07/share5-1/" class="post-title-link" itemprop="url">share5-1</a>
+            <a href="/2021/03/16/share5.1/" class="post-title-link" itemprop="url">前端分享</a>
         </h1>
 
         <div class="post-meta">
@@ -188,14 +188,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-07 18:35:12" itemprop="dateCreated datePublished" datetime="2020-11-07T18:35:12+08:00">2020-11-07</time>
+              <time title="创建时间：2021-03-16 00:00:00" itemprop="dateCreated datePublished" datetime="2021-03-16T00:00:00+08:00">2021-03-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-08 02:42:16" itemprop="dateModified" datetime="2020-11-08T02:42:16+08:00">2020-11-08</time>
+                <time title="修改时间：2021-03-19 14:01:47" itemprop="dateModified" datetime="2021-03-19T14:01:47+08:00">2021-03-19</time>
               </span>
 
           
@@ -209,127 +209,56 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>JavaScript 对象是被命名值的容器。</p>
-<h4 id="对象简介"><a href="#对象简介" class="headerlink" title="对象简介"></a><strong>对象简介</strong></h4><p>对象属性: 变量的键值对<br>对象也可以有方法。<br>方法是在对象上执行的动作。<br>方法以函数定义被存储在属性中。<br>方法是作为属性来存储的函数。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> object = &#123;</span><br><span class="line">  property: <span class="string">"属性"</span>,</span><br><span class="line">  method: <span class="function"><span class="keyword">function</span>(<span class="params">argu</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> argu || <span class="string">"方法"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="对象访问"><a href="#对象访问" class="headerlink" title="对象访问"></a><strong>对象访问</strong></h4><p>对象可以通过两种方式访问, 一种是通过 <code>.</code> 操作符访问 如: <code>object.property</code> 或者 <code>object.method(&quot;method&quot;)</code>, 第二种方式就是通过 <code>[]</code> 访问 如:<code>object[property]</code> 或者 <code>object[method](method)</code></p>
-<p>这两种的区别在于,使用中括号的方式可以在中括号中使用变量或者表达式 例如 <code>object[&quot;me&quot;+&quot;th&quot;+&quot;od&quot;]()</code></p>
-<h4 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a><strong>对象创建</strong></h4><p>在javascript中对象可以方便的用 <code>JSON</code> 格式来描述一个对象, 只需要使用他就可以直接创建对象,上文中的 <code>object</code>就是一个例子,另外的, 和一般的面向对象一样, 我们可以通 <code>new</code> 操作符来完成对象的创建. 这里我们就需要提到一种叫做构造函数的东西. 构造函数和一般的函数没有区别, 任何非箭头函数都可以作为对象的构造函数.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ok</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// ok</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// not ok</span></span><br><span class="line"><span class="keyword">const</span> c = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ok</span></span><br><span class="line"><span class="keyword">new</span> a();</span><br><span class="line"><span class="keyword">new</span> b();</span><br><span class="line"></span><br><span class="line"><span class="comment">// not ok</span></span><br><span class="line"><span class="keyword">new</span> c();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Uncaught TypeError: a is not a constructor</span></span><br></pre></td></tr></table></figure>
-
-<p>除此之外,我们也可以用 <code>Object.create()</code>创建拥有特定原型的对象</p>
-<h4 id="对象的属性"><a href="#对象的属性" class="headerlink" title="对象的属性"></a><strong>对象的属性</strong></h4><p>对象属性的权限问题.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123; <span class="attr">test</span>: <span class="string">'test'</span>&#125;</span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptors(a, <span class="string">'test'</span>)</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  &#123;</span></span><br><span class="line"><span class="comment">    test: &#123;</span></span><br><span class="line"><span class="comment">      configurable: true</span></span><br><span class="line"><span class="comment">      enumerable: true</span></span><br><span class="line"><span class="comment">      value: "test"</span></span><br><span class="line"><span class="comment">      writable: true</span></span><br><span class="line"><span class="comment">      __proto__: Object</span></span><br><span class="line"><span class="comment">    &#125;,</span></span><br><span class="line"><span class="comment">    __proto__: Object</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<p>特性名称    |描述|    默认值<br>|  —-  | —-  | —- |<br>value|    属性的值    |undfined<br>writable|    是否可以修改属性的值，true表示可以，false表示不可以    |true<br>enumerable|    属性值是否可枚举，true表示可枚举for-in, false表示不可枚举    |true<br>configurable    |属性的特性是否可配置，表示能否通过delete删除属性后重新定义属性|true</p>
-<p>这些属性不能直接定义,需要通过<code>Object.defineProperty()</code>来定义</p>
-<p>使用 <code>in</code> 操作符可以 判断对象中是否存在某属性, 例如</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'test'</span> <span class="keyword">in</span> a;</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="string">'toString'</span> <span class="keyword">in</span> a;</span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<p>a 中 虽然没有 <code>toString</code> 但是 返回值仍然是 <code>true</code></p>
-<p>虽然 a 中没有该属性, 但是他的原型中有.</p>
-<p>单单使用 <code>json</code> 的方式创建的并不是一个空的对象, 即使被赋值为 <code>{}</code> 里面也会有内置的属性, 所有的对象都会继承自js内部的对象, 当访问对象中不存在的属性时, 对象会根据原型链去原型中去寻找, 一层层向上寻找,直到达到最顶端.这就形成了原型链. 空对象的原型是什么呢?是<code>Object.prototype</code>,它是所有对象中原型的父原型.<br>除去 自定义的属性, 对象会被加入一个 <code>__protp__</code> 属性, 通过一般构造函数创建的对象,其<code>__protp__</code>中有两个属性,一个是<code>constructor</code>,另一个是<code>__protp__</code>,前一个指向他的构造函数, 第二个指向上一层原型.</p>
-<p>先将<code>__protp__</code> 放在一边, 如何只检测自己的属性呢, <code>Object.hasOwnProperty()</code>，判断一个对象是否有指定名称的属性，不会检查继承属性,<code>Object.propertyIsEnumerable()</code>，判断指定名称的属性是否为实例属性并且是可枚举的, <code>Object.keys()</code>返回一个数组，内容是对象可枚举的实例属性名称</p>
-<p>Object中有许多的方法,可以通过浏览器或者IDE查看.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/30/share4-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/30/share4-2/" class="post-title-link" itemprop="url">share4-2</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-30 23:41:58" itemprop="dateCreated datePublished" datetime="2020-10-30T23:41:58+08:00">2020-10-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-01 01:26:25" itemprop="dateModified" datetime="2020-11-01T01:26:25+08:00">2020-11-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>浏览器提供了我们开发工具,我们就要好好利用,多了解一下他的功能</p>
-<p>按下F12</p>
-<h4 id="Elements"><a href="#Elements" class="headerlink" title="Elements"></a>Elements</h4><p>  这里存放着html源代码和css样式<br>  对某一个html元素右键,可以对对元素的属性进行修改.也可以直接对整个网页元素进行修改(Edit as HTML)<br>  copy可以复制当前元素的许多信息,可以复制整个元素,JS的选择路径,css…可以快速将页面移动到所选元素处,最重要的是他可以打断点,所有的断点会被写在一旁的DOM Breakpoints里,这一行的Event Listener页面，可以查看到该元素的所有监听事件。在开发中，尤其是维护其他人的代码时，会出现不了解元素对应的监听事件，这个时候，可以在这个页面中找到。这个页面不仅能看到对应的事件函数，还可以定位该函数所在的JS文件以及在该文件中的具体位置（行数），大大提高开发维护的效率。Properties 中还提示我们 $0指向我们现在选中的元素,我们可以通过<code>console.dir($0)</code>来访问这个元素的所有属性.</p>
-<p>  元素被打断点之后如果被js代码改变,页面会停止加载,方便我们查看元素属性<br>  还可以直接将元素作为全局变量进行输出, 非常便于调试</p>
-<h4 id="Console"><a href="#Console" class="headerlink" title="Console"></a>Console</h4><p>  控制台的主要工作还是输出js内部的细节以及报错等等,对于不确定的输出,也可以在这里进行尝试.<br>  $()    | 返回与指定的CSS选择器相匹配的第一个元素，等同于document.querySelector()<br>  $$()    | 返回与指定的CSS选择器相匹配的所有元素的数组，等同于document.querySelectorAll()</p>
-<p>  $x()    | 返回与指定的XPath相匹配的所有元素的数组</p>
-<h4 id="Sourcs"><a href="#Sourcs" class="headerlink" title="Sourcs"></a>Sourcs</h4><p>  再来简单的说一下断点, 断点就是开发工具提供的一种功能,可以让程序在我们指定的地方中断运行, 我们在这个时候去观察某些变量的值,函数的堆栈,这样可以让我们更加清楚在程序内部数据是如何变化流动的.这比我们反复修改程序在里面增删<code>console.log</code>高效多了</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">argu</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> b(argu + <span class="string">"2"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">argu</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> c(argu + <span class="string">"3"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params">argu</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> d(argu + <span class="string">"4"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">d</span>(<span class="params">argu</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> e(argu + <span class="string">"5"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a(<span class="string">"1"</span>));</span><br></pre></td></tr></table></figure>
-<p>  例如对上面这个js打断点 在<code>return b(argu + &quot;2&quot;)</code>打点,就可以看到argu的值是”1”<br>  还可以对断点添加条件,当符合条件时,浏览器中断运行.<br>  一侧的辅助框还可以在断点间跳动,继续运行…<br>  call stack记录了当前行的函数调用栈,可以清楚地看见函数的运行.</p>
-<h4 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h4><p>从红点开始往右<br>记录按钮 处于打开状态时会在此面板进行网络连接的信息记录，关闭后则不会记录。<br>清除按钮 清除当前的网络连接记录信息</p>
-<p>还可以对所有的请求进行相应的筛选,让我们不用在长长的列表中来回翻找.</p>
-<p>一些条件</p>
+          <h3 id="前端请求"><a href="#前端请求" class="headerlink" title="前端请求"></a>前端请求</h3><p>  小程序完成静态之后需要与后端联调, 所以需要掌握与后端联系的方法, 请求(request)就是与后端联系的通道.<br>  通俗地讲, 请求就是一个网址, 电脑解析网址之后向去找到网址对应的IP地址, 并携带信息去访问目的地址. 直接在浏览器地址里面输入API的URL, 浏览器也会尝试用默认的方法和首部构建请求访问并获取信息.</p>
+<h4 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a>XMLHttpRequest</h4><p>  <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest" target="_blank" rel="noopener">XHR</a>是一个经典的浏览器对象, 用于构建与服务器的连接.</p>
+<p>  与大多数其他的浏览器对象相似, 我们想要使用XHR, 首先就是要创建XHR实例.<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> XHR = <span class="keyword">new</span> XMLHttpRequest();</span><br></pre></td></tr></table></figure></p>
+<p>  打开控制台, 在里面输入上述语句, 并查看XHR中包含的属性, 通过控制台输出的信息, 我们可以了解到关于XHR的很多信息.</p>
+<p>  常见属性:</p>
 <ul>
-<li>domain：资源所在的域(url中的域名部分)</li>
-<li>has-response-header：资源是否存在响应头</li>
-<li>is：当前时间点在执行的请求。</li>
-<li>larger-than：显示大于指定值大小规格的资源。单位是字节(B)</li>
-<li>method：使用何种HTTP请求方式。如 GET</li>
-<li>mime-type：也写作content-type，是资源类型的标识符。如 text/html</li>
-<li>scheme：协议规定。如 HTTPS</li>
-<li>set-cookie-name：服务器设置的cookies名称</li>
-<li>status-code：HTTP响应头的状态码</li>
+<li><p>xhr.<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/readyState" target="_blank" rel="noopener">readyState</a>：XMLHttpRequest对象的状态，等于4表示数据已经接收完毕。</p>
+</li>
+<li><p>xhr.status：服务器返回的状态码。</p>
+</li>
+<li><p>xhr.response[…]：服务器响应数据</p>
+</li>
+<li><p>xhr.timeout：限制响应时长。</p>
+</li>
+<li><p>xhr.upload：上传进度。</p>
+<p>常见方法:</p>
+</li>
+<li><p>xhr.open：加载请求。</p>
+</li>
+<li><p>xhr.send：发送请求。</p>
+<p>…</p>
+<p>更多属性参见MDN</p>
+<p>大概了解 XHR 里面有什么东西之后,请求的问题便迎刃而解.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 简单的请求功能</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">XHR</span>(<span class="params">URL, method</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> XHR = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  <span class="comment">// xhrReq.open(method, url, async, user, password);</span></span><br><span class="line">  XHR.open(method, URL, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打开F12 在NETWORK中查看请求是否发送成功;<br>如果看到了你填写的网址出现,并且是200, 那么说明这个请求成功发送了;<br>现在我们需要做的就是拿到数据并且加工后展示在我们的页面里面.</p>
+<p>在send成功并且返回数据之后, xhr 对象会调用 <code>onreadystatechange</code> 函数, 告知状态发生变化, 获取到的信息会存放在response 相关的几个属性.</p>
+<p>举例来说</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (xhr.status === <span class="number">200</span>) &#123;</span><br><span class="line">      renderMoreChild(&#123;</span><br><span class="line">          intro: <span class="string">'response'</span>,</span><br><span class="line">          value: xhr.responseText</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以从xhr 中取出存在responseText里面的数据了, 不只是Text, 也会有其他数据, 一般来说我们都只会用到json 的数据,其他类型的可以自行谷歌.</p>
+<p>简单的封装样例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">XHR</span>(<span class="params">url = <span class="string">'/'</span>, method = <span class="string">"GET"</span>, options = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> preHttp = <span class="string">"http://localhost:9090/default"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">      <span class="keyword">if</span> (xhr) &#123;</span><br><span class="line">          xhr.open(method.toUpperCase(), preHttp + url, <span class="literal">false</span>);</span><br><span class="line">          xhr.setRequestHeader(<span class="string">'token'</span>, options.token || <span class="string">""</span>);</span><br><span class="line">          xhr.onload = options.onload || <span class="literal">null</span>;</span><br><span class="line">          xhr.onloadend = options.onloadend || <span class="literal">null</span>;</span><br><span class="line">          xhr.onerror = options.onerror || <span class="literal">null</span>;</span><br><span class="line">          xhr.ontimeout = options.ontimeout || <span class="literal">null</span>;</span><br><span class="line">          xhr.onreadystatechange = options.onreadystatechange.bind(<span class="keyword">this</span>, xhr) || <span class="literal">null</span>;</span><br><span class="line">          <span class="comment">// ...</span></span><br><span class="line">          xhr.send();</span><br><span class="line">          <span class="keyword">return</span> xhr;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">      <span class="keyword">throw</span> err;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
 </ul>
-<p>能够根据时间，查看对应时间下 浏览器请求的资源信息</p>
-<p>Preserve log：是否保留日志 </p>
-<p>当选择保留日志，重新加载url当前界面时，之前请求显示的资源信息，会保留下来</p>
-<p>Disable cache：是否进行缓存</p>
-<p>当打开开发者工具时生效，打开这个开关，则页面资源不会存入缓存，可以从Status栏的状态码看文件请求状态。</p>
-<p>offline : 设置模拟速度,3G, 4G, WiFi…<br>对着请求右键也可以对相应的信息进行复制.</p>
-<p>最上面的长条记录了各个请求收到回复的时间和处理文件的时间长短</p>
-<h4 id="performance"><a href="#performance" class="headerlink" title="performance"></a>performance</h4><p>  这个选项可以记录我们的浏览动作,比如上下滚动,交互等等,与此同时,他还记录下了关于CPU的信息,可以看到FPS和NET,也就是说在这我们可以看到那些时候哪些动作是最耗费资源的,这样我们就可以对相应的部分进行优化.如果在css动画和布局的计算上面消耗了大量资源,那么对js部分的数据计算就会有影响,在进行布局是要对样式的应用有选择.</p>
-<p>  1、大开销样式计算影响响应或动画<br>　　任何会更改元素几何形状的 CSS 属性，如宽度、高度或位置；浏览器必须检查所有其他元素并重做布局。避免会触发重排的CSS属性</p>
-<p>　　2、复杂的选择器影响响应或动画<br>  嵌套选择器强制浏览器了解与所有其他元素有关的全部内容，包括父级和子级。尽量在CSS中引用只有一个类的元素</p>
-<p>由于手机cpu运算速率没有电脑高,我们也可以用电脑浏览器对手机的计算负载进行模拟</p>
-<h4 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h4><p>该面板主要是记录网站加载的所有资源信息，包括存储数据（Local Storage、Session Storage、IndexedDB、Web SQL、Cookies）、缓存数据、字体、图片、脚本、样式表等。</p>
-<p>Local Storage 如果你在开发过程中使用了local storage来存储键值对(KVPs)，那么你就可以通过Local Storage窗格来检查、新增、修改、删除这个键值对。<br>Application Cache 你可以使用Application Cache窗格去查看通过Application Cache API创建的资源。</p>
+<h4 id="fetch"><a href="#fetch" class="headerlink" title="fetch"></a>fetch</h4><p>  fetch 是 XHR 的进阶版,基于XHR进行了改进和封装, 相较于 XHR更新并且更加灵活.<br>  fetch 提供了 Response 和 Request 对象, 接收一个地址, 无论成功与否, 返回一个Response对象;</p>
+<p>  最简单的fetch操作</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">  fetch(url)</span><br><span class="line">  .then( <span class="function"><span class="params">response</span> =&gt;</span> response.json())</span><br><span class="line">  .then( <span class="function"><span class="params">json</span> =&gt;</span> render(json))</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="keyword">throw</span> err)</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string">- response.text()：得到文本字符串。</span></span><br><span class="line"><span class="string">- response.json()：得到 JSON 对象。</span></span><br><span class="line"><span class="string">- response.blob()：得到二进制 Blob 对象。</span></span><br><span class="line"><span class="string">- response.formData()：得到 FormData 表单对象。</span></span><br><span class="line"><span class="string">- response.arrayBuffer()：得到二进制 ArrayBuffer 对象。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">一切都是按照默认的程序进行, 第二个参数用来决定请求的细节</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">举个例子, 具体细节参考 MDN Request接口</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span> ts</span><br><span class="line">  </span><br><span class="line">  interface optionObj &#123;</span><br><span class="line">    method: <span class="string">'POST'</span>|<span class="string">'GET'</span>|<span class="string">'DELETE'</span>|<span class="string">'PUT'</span>;</span><br><span class="line">    header: object;</span><br><span class="line">    body: FormData | object;</span><br><span class="line">    cache: <span class="string">"default"</span>|<span class="string">"no-store"</span>|<span class="string">"reload"</span>|<span class="string">"no-cache"</span>|<span class="string">"force-cache"</span>|<span class="string">"only-if-cached"</span>,</span><br><span class="line">    mode: <span class="string">"cors"</span>|<span class="string">"same-origin"</span>|<span class="string">"no-cors"</span>, </span><br><span class="line">    credentials: <span class="string">"same-origin"</span>|<span class="string">"include"</span>|<span class="string">"omit"</span>,</span><br><span class="line">    redirect: <span class="string">"follow"</span>|<span class="string">"error"</span>|<span class="string">"manual"</span>,</span><br><span class="line">    integrity: hash,</span><br><span class="line">    referrer: <span class="string">"about:client"</span>,</span><br><span class="line">    referrerPolicy: <span class="string">"no-referrer-when-downgrade"</span>,</span><br><span class="line">    keepalive: <span class="literal">false</span>,</span><br><span class="line">    signal: <span class="literal">undefined</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> fetch = (url: string, <span class="attr">optionObj</span>: optionObj): Response&lt;T&gt; =&gt; &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  封装举例</p>
+<p>  现阶段用到的部分不多, fetch的大部分参数用不到, 最频繁的就是 URL method body 三个属性, 封装主要考虑这三者;</p>
+<p>  成熟的封装网上有很多, 大家可以参考谷歌</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface optionObj &#123;</span><br><span class="line">  header: object;</span><br><span class="line">  token: boolean;</span><br><span class="line">  body: Formdata | object | blob;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Fetch = (url: string, <span class="attr">method</span>: <span class="string">'POST'</span>|<span class="string">'GET'</span>|<span class="string">'DELETE'</span>|<span class="string">'PUT'</span>, <span class="attr">optionObj</span>: optionObj): <span class="function"><span class="params">Response</span> =&gt;</span> &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> preHttp = <span class="string">"https://baseurl.com/api/v1"</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> fetch(preHttp + url, &#123;</span><br><span class="line">    method: method.toUpperCase(),</span><br><span class="line">    header: &#123;</span><br><span class="line">      <span class="string">'content-type'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">      ...(optionObj.header || &#123;&#125;),</span><br><span class="line">      token: optionObj.token &amp;&amp; token.getToken()</span><br><span class="line">    &#125;,</span><br><span class="line">    body: optionObj.body</span><br><span class="line">  &#125;).then( <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (res.ok) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">200</span>: </span><br><span class="line">        <span class="keyword">return</span> res.json();</span><br><span class="line">      <span class="keyword">case</span> <span class="number">400</span>:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">401</span>:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">404</span>:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">502</span>:</span><br><span class="line">        <span class="comment">// 错误处理</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  小程序用的请求示例</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> preHttp = <span class="string">'https://baseUrl.com/api/v1'</span>;</span><br><span class="line"><span class="keyword">const</span> Fetch = <span class="function">(<span class="params">url, data = &#123;&#125;, method = <span class="string">'GET'</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> header = &#123;</span><br><span class="line">    <span class="string">'content-type'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">    token: Taro.getStorageSync(<span class="string">'token'</span>)</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> Taro.request(&#123;</span><br><span class="line">    url: preHttp + url,</span><br><span class="line">    data,</span><br><span class="line">    method,</span><br><span class="line">    header</span><br><span class="line">  &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> (res.statusCode) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">200</span>: </span><br><span class="line">        <span class="keyword">if</span> (res.data) &#123;</span><br><span class="line">          <span class="keyword">return</span> res.data;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> res.code;</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">400</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'没有权限访问'</span>);</span><br><span class="line">      <span class="keyword">case</span> <span class="number">401</span>:</span><br><span class="line">        <span class="keyword">const</span> id = Taro.getStorageSync(<span class="string">'sid'</span>)</span><br><span class="line">        <span class="keyword">const</span> password = Taro.getStorageSync(<span class="string">'pwd'</span>)</span><br><span class="line">        <span class="keyword">if</span> ( id&amp;&amp;password ) &#123;</span><br><span class="line">          Taro.request(&#123;</span><br><span class="line">            url: <span class="string">'https://planet.muxixyz.com/lonely_planet/v1/login/'</span>,</span><br><span class="line">            data: &#123;</span><br><span class="line">              sid:id,</span><br><span class="line">              pwd:password</span><br><span class="line">            &#125;,</span><br><span class="line">            method:<span class="string">'POST'</span>,</span><br><span class="line">            header:&#123;<span class="string">'content-type'</span>: <span class="string">'application/json'</span>&#125;</span><br><span class="line">          &#125;).then( <span class="function"><span class="params">back</span> =&gt;</span> &#123;</span><br><span class="line">            Taro.setStorage(&#123;</span><br><span class="line">              key: <span class="string">'token'</span>,</span><br><span class="line">              data: back.data.token,</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (res.data) &#123;</span><br><span class="line">          <span class="keyword">return</span> res.data;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> res.code;</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">404</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'not found'</span>);</span><br><span class="line">      <span class="keyword">case</span> <span class="number">500</span>:</span><br><span class="line">      <span class="keyword">case</span> <span class="number">502</span>:</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          msg: <span class="string">'server_wrong'</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// throw new Error('服务器错误');</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
 
       
     </div>
@@ -349,7 +278,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/29/share4-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/15/crypto/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -363,287 +292,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/10/29/share4-1/" class="post-title-link" itemprop="url">share 4-1</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-29 20:26:02" itemprop="dateCreated datePublished" datetime="2020-10-29T20:26:02+08:00">2020-10-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-30 23:40:56" itemprop="dateModified" datetime="2020-10-30T23:40:56+08:00">2020-10-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>官方github：<a href="https://github.com/SheetJS/js-xlsx" target="_blank" rel="noopener">https://github.com/SheetJS/js-xlsx</a></p>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p> 通过npm下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install xlsx --save</span><br></pre></td></tr></table></figure>
-<p><code>dist</code>中有许多的文件,主要的文件就是 <code>xlsx.core.min.js</code>和<code>xlsx.full.min.js</code>.前者只输出了一部分功能.<br>引入script<code>&lt;script type=&quot;text/javascript&quot; src=&quot;./js/xlsx.core.min.js&quot;&gt;&lt;/script&gt;</code></p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>js-xlsx 提供了一个XLS 和 XLSX对象给我们;在其内部定义了一个wb(workbook)对象,用来记录和描述一个xlsx等表格文件的内容.在里面有两个属性存储表格的文本数据: SheetNames 和 Sheets</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;Directory: &#123;…&#125;, Workbook: &#123;…&#125;, Props: &#123;…&#125;, Custprops: &#123;…&#125;, Deps: &#123;…&#125;, …&#125;</span><br><span class="line">Custprops: &#123;KSOProductBuildVer: &quot;2052-11.1.0.9505&quot;&#125;</span><br><span class="line">Deps: &#123;&#125;</span><br><span class="line">Directory: &#123;workbooks: Array(1), sheets: Array(3)…&#125;</span><br><span class="line">Props: &#123;LastAuthor: &quot;liuan&quot;, Author: &quot;wps&quot;, CreatedDate: Sat May 26 2018 19:28:00 GMT+0800 (中国标准时间)…&#125;</span><br><span class="line">SSF: &#123;0: &quot;General&quot;, 1: &quot;0&quot;, 2: &quot;0.00&quot;, 3: &quot;#,##0&quot;…&#125;</span><br><span class="line">SheetNames: (3) [&quot;Sheet1&quot;, &quot;Sheet2&quot;, &quot;Sheet3&quot;]</span><br><span class="line">Sheets: &#123;Sheet1: &#123;…&#125;, Sheet2: &#123;…&#125;, Sheet3: &#123;…&#125;&#125;</span><br><span class="line">Strings: (16) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;…]</span><br><span class="line">Styles: &#123;NumberFmt: Array(65536)…&#125;</span><br><span class="line">Themes: &#123;&#125;</span><br><span class="line">Workbook: &#123;AppVersion: Array(1), WBProps: Array(1) …&#125;</span><br><span class="line">__proto__: Object</span><br></pre></td></tr></table></figure>
-
-<h5 id="Sheet-Object"><a href="#Sheet-Object" class="headerlink" title="Sheet Object"></a><a href="https://github.com/SheetJS/sheetjs#worksheet-object" target="_blank" rel="noopener">Sheet Object</a></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Sheet1:</span><br><span class="line">!merges: (7) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;, &#123;…&#125;]</span><br><span class="line">!ref: &quot;A1:H45&quot;</span><br><span class="line">A1: &#123;t: &quot;s&quot;, v: &quot;全局bug&quot;, r: &quot;&lt;t&gt;&lt;/t&gt;&quot;, h: &quot;全局bug&quot;, w: &quot;全局bug&quot;&#125;</span><br><span class="line">A2: &#123;t: &quot;n&quot;, v: &quot;&quot;&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>主要看Sheet里面的属性 字母数字的组合代表了一个普通单元格,!开头的对象则记录了表格的特殊信息,例如 !ref记录了sheet表格的范围,!merges记录了单元格的合并信息,还有!rows/!cols…</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// end ,start, column, row</span></span><br><span class="line"><span class="comment">// e: 结束位置的单元格坐标</span></span><br><span class="line"><span class="comment">// start from 0</span></span><br><span class="line"><span class="comment">// B5 &#123; r: 4, c: 1&#125;</span></span><br><span class="line">&#123;</span><br><span class="line">  e:&#123; <span class="attr">c</span>: ?, <span class="attr">r</span>: ?&#125;,</span><br><span class="line">  s:&#123; <span class="attr">c</span>: ?, <span class="attr">r</span>: ?&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="单元格对象"><a href="#单元格对象" class="headerlink" title="单元格对象"></a>单元格对象</h5><p>每一个单元格是一个对象（Cell Object），主要有t、v、r、h、w等字段（详见这里）：</p>
-<p>v：表示原始值；<br>w：格式化后的内容;<br>t：表示内容类型，s:string，n:nmber，b:boolean，d:date, e:error, z:blank stub..<br>f：表示公式，如B2+B3；<br>h：HTML内容;<br>r：富文本内容rich text;<br>s: 单元格样式或主题(if applicable)</p>
-<h3 id="XLSX-对象"><a href="#XLSX-对象" class="headerlink" title="XLSX 对象"></a>XLSX 对象</h3><p>xlsx对象提供给我们了一系列的函数和工具主要的就是utils, read 和 write, utils提供了一系列的工具函数来帮助我们进行数据的转换,readFile/writeFile…都是在读写两个函数的基础上进行了包装. 在官方文档中对很多内容都进行了解释.</p>
-<h5 id="utils"><a href="#utils" class="headerlink" title="utils"></a>utils</h5><p>  里面的函数大致分为 四 类:编码解码/格式转换/创建新对象/设置内容;<br>  Some helper functions in XLSX.utils generate different views of the sheets:</p>
-<ul>
-<li>XLSX.utils.sheet_to_csv generates CSV</li>
-<li>XLSX.utils.sheet_to_txt generates UTF16 Formatted Text</li>
-<li>XLSX.utils.sheet_to_html generates HTML</li>
-<li>XLSX.utils.sheet_to_json generates an array of objects</li>
-<li>XLSX.utils.table_to_book generates workbook object</li>
-<li>…</li>
-</ul>
-<p>book 指的是 workbook 工作对象, 里面的sheet指的就是book中的一张表可以通过<code>XLSX.utils.book_append_sheet</code>将sheet插入到book中,对象转换类的函数都可以顾名思义,通过名自判断出对应的效果. </p>
-<h5 id="Parsing-functions"><a href="#Parsing-functions" class="headerlink" title="Parsing functions"></a><a href="https://github.com/SheetJS/sheetjs#parsing-options" target="_blank" rel="noopener">Parsing functions</a></h5><p>XLSX.read(data, read_opts) attempts to parse data.<br>XLSX.readFile(filename, read_opts) attempts to read filename and parse.</p>
-<h5 id="Writing-functions"><a href="#Writing-functions" class="headerlink" title="Writing functions"></a><a href="https://github.com/SheetJS/sheetjs#writing-options" target="_blank" rel="noopener">Writing functions</a></h5><p>XLSX.write(wb, write_opts) attempts to write the workbook wb<br>XLSX.writeFile(wb, filename, write_opts) attempts to write wb to filename.<br>XLSX.writeFileAsync(filename, wb, o, cb) attempts to write wb to filename. </p>
-<p>例子 :<br>读取数据</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readWorkbookFromLocalFile</span>(<span class="params">file, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">  reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data = e.target.result;</span><br><span class="line">    <span class="keyword">var</span> workbook = XLSX.read(data, &#123;</span><br><span class="line">      type: <span class="string">'binary'</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">if</span> (callback) callback(workbook);</span><br><span class="line">  &#125;;</span><br><span class="line">  reader.readAsBinaryString(file);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>写入数据</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = XLSX.utils.table_to_sheet(<span class="built_in">document</span>.getElementById(<span class="string">"table"</span>))</span><br><span class="line"><span class="keyword">const</span> wb = XLSX.utils.book_new();</span><br><span class="line">XLSX.utils.book_append_sheet(<span class="number">90</span> wb, a, <span class="string">'Sheet1'</span>)</span><br><span class="line">XLSX.writeFile(wb, <span class="string">'sheet.xlsx'</span>)</span><br></pre></td></tr></table></figure>
-
-<p>拿<code>aoa_to_sheet</code>函数为例</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aoa = [</span><br><span class="line">  <span class="comment">// 特别注意合并的地方后面预留2个null</span></span><br><span class="line">	[<span class="string">'主要信息'</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="string">'其它信息'</span>], </span><br><span class="line">	[<span class="string">'姓名'</span>, <span class="string">'性别'</span>, <span class="string">'年龄'</span>, <span class="string">'注册时间'</span>],</span><br><span class="line">	[<span class="string">'张三'</span>, <span class="string">'男'</span>, <span class="number">18</span>, <span class="keyword">new</span> <span class="built_in">Date</span>()],</span><br><span class="line">	[<span class="string">'李四'</span>, <span class="string">'女'</span>, <span class="number">22</span>, <span class="keyword">new</span> <span class="built_in">Date</span>()]</span><br><span class="line">];</span><br><span class="line"><span class="keyword">var</span> sheet = XLSX.utils.aoa_to_sheet(aoa);</span><br><span class="line">sheet[<span class="string">'!merges'</span>] = [</span><br><span class="line">	<span class="comment">// 设置A1-C1的单元格合并</span></span><br><span class="line">    &#123;<span class="attr">s</span>: &#123;<span class="attr">r</span>: <span class="number">0</span>, <span class="attr">c</span>: <span class="number">0</span>&#125;, <span class="attr">e</span>: &#123;<span class="attr">r</span>: <span class="number">0</span>, <span class="attr">c</span>: <span class="number">2</span>&#125;&#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-
-<p>更多参考官方文档</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/04/gesture/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/04/gesture/" class="post-title-link" itemprop="url">gesture</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-04 01:25:28" itemprop="dateCreated datePublished" datetime="2020-10-04T01:25:28+08:00">2020-10-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-15 12:41:39" itemprop="dateModified" datetime="2020-10-15T12:41:39+08:00">2020-10-15</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>对地图进行操作的时候我们经常会用到一些手势,于是我查了点手势相关的信息简单介绍</p>
-<p>常用的 HTML5 手势可以分为两类，单点手势和两点手势。<br>单点手势有 tap（单击），double tap（双击），long tap（长按），swipe（挥），move（移动）。<br>两点手势有 pinch（缩放），rotate（旋转）。</p>
-<p>简单提一下触摸的三个API touchstart，touchmove，touchend 还有一个 touchcancel是在不小心失去手机焦点时的处理机制,可以自行考虑. 在调用三个API的时候,会用到一个事件e, 在e里面会有一个数组属性叫做 touches, 里面包含了当时的所有触点(手指) 我们需要做的就是对这些已经给出的信息进行分析,并对视图进行修改;</p>
-<p>移动过于简单,就是在每次touchmove事件发生时，把两个位移点之间的坐标位置相减，就可以了。<br>在手机中,浏览器经常会自带一些后退刷新的手势,而这些手势容易和自定义的移动冲突,降低用户体验,所以在h5map中,我使用的是浏览器自带的滚动条来实现移动,使用两个div和一些css样式来隐藏滚动条.</p>
-<p>单击（tap）,double tap（双击），long tap（长按），从原理上来讲都差不多, 就是检测手指和屏幕触摸的时间.</p>
-<p>在 touchstart 发生时进入单击检测，只有一个接触点。没有发生 touchmove 事件或者 touchmove 在一个很小的范围,我们不能保证用户精准利落的完成点下抬起的动作。</p>
-<p>touchend 发生在 touchstart后的很短时间内, 单击事件从开始到结束是很快的。</p>
-<p>我们需要记录时间 自然就联想到我们的Date对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">getTime() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  <span class="keyword">const</span> touchEvent = &#123;</span><br><span class="line">    startX: <span class="number">0</span>,</span><br><span class="line">    startY: <span class="number">0</span>,</span><br><span class="line">    startTime: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">    <span class="comment">//记录touch开始的位置</span></span><br><span class="line">    touchEvent.startX = e.touches[<span class="number">0</span>].pageX;</span><br><span class="line">    touchEvent.startY = e.touches[<span class="number">0</span>].pageY;</span><br><span class="line">    <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">//多点监测</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//记录touch开始的时间</span></span><br><span class="line">      touchEvent.startTime = <span class="keyword">this</span>.getTime();</span><br><span class="line">    &#125;</span><br><span class="line">    ...setState...</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  <span class="comment">//记录手指移动的位置</span></span><br><span class="line">  ...getState...</span><br><span class="line">  touchEvent.moveX = e.touches[<span class="number">0</span>].pageX;</span><br><span class="line">  touchEvent.moveY = e.touches[<span class="number">0</span>].pageY;</span><br><span class="line">  ...setState...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchEnd(e) &#123;</span><br><span class="line">  <span class="keyword">let</span> timestamp = <span class="keyword">this</span>.getTime();</span><br><span class="line">  <span class="keyword">if</span>(touchEvent.moveX !== <span class="literal">null</span> &amp;&amp; <span class="built_in">Math</span>.abs(touchEvent.moveX - touchEvent.startX) &gt; <span class="number">10</span> ||</span><br><span class="line">    touchEvent.moveY !== <span class="literal">null</span> &amp;&amp; <span class="built_in">Math</span>.abs(touchEvent.moveY - touchEvent.startY) &gt; <span class="number">10</span>) &#123;</span><br><span class="line">      ...</span><br><span class="line"></span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//手指移动的位移要小于10像素并且手指和屏幕的接触时间要短语500毫秒</span></span><br><span class="line">    <span class="keyword">if</span>(timestamp - touchEvent.startTime &lt; <span class="number">500</span>) &#123;</span><br><span class="line">      <span class="comment">// 执行点击(tap)事件</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>长按（long press）<br>长按和单击差不多,只是在屏幕上停留的时间比较久而已.<br>我们可以这样分解：在 touchstart 发生后的很长一段时间内，如果没有发生 touchmove 或者 touchend 事件，那么就触发长按手势。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">// 同上</span></span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.longPressTimeout = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.emitEvent(<span class="string">'onLongPress'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchEnd(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  clearTimeout(<span class="keyword">this</span>.longPressTimeout);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>同样将单击的事件阈值放大也可以实现这个功能,单击时,点击事件不能超过,而长按是不少于;</p>
-<p>双击（double tap）</p>
-<p>双击事件是一个手指的行为。所以在 touchstart 时，我们要判断此时屏幕有几个接触点。</p>
-<p>双击事件本质是两次快速的单击。也即是说，两次点击的间隔时间很短,一般来说,两个单机事件的位置也相差不大。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.previousTouchPoint) &#123;</span><br><span class="line">      <span class="comment">//两次相邻的touchstart之间距离要小于10，同时时间间隔小于300ms</span></span><br><span class="line">      <span class="keyword">if</span>( <span class="built_in">Math</span>.abs(touchEvent.startX -<span class="keyword">this</span>.previousTouchPoint.startX) &lt; <span class="number">10</span>  &amp;&amp;</span><br><span class="line">          <span class="built_in">Math</span>.abs(touchEvent.startY - <span class="keyword">this</span>.previousTouchPoint.startY) &lt; <span class="number">10</span> &amp;&amp; </span><br><span class="line">          <span class="built_in">Math</span>.abs(touchEvent.startTime - <span class="keyword">this</span>.previousTouchTime) &lt; <span class="number">300</span>) &#123;</span><br><span class="line">            <span class="comment">// 执行双击事件</span></span><br><span class="line">            <span class="keyword">this</span>.emitEvent(<span class="string">'onDoubleTap'</span>);</span><br><span class="line">          &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//保存上一次touchstart的时间和位置信息</span></span><br><span class="line">  ...setstate...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>缩放（pinch）</p>
-<p>缩放是两个手指的行为，需要检测屏幕上是否有两个接触点。<br>缩放比例的量化，是通过两次缩放行为之间的距离的比值得到的.<br>所以缩放的核心是获取两个接触点之间的直线距离。</p>
-<p>touches给出的坐标可以让我们简单的算出两点之间的距离</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">onTouchStart(e) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> point1 = e.touches[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> point2 = e.touches[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">this</span>.touchDistance = <span class="keyword">this</span>.getDistance(point1, point2);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在onTouchStart函数中获取并且保存 touchstart 发生时两个接触点之间的距离。</span></span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> xLen = <span class="built_in">Math</span>.abs(e.touches[<span class="number">0</span>].pageX - e.touches[<span class="number">1</span>].pageX);</span><br><span class="line">      <span class="keyword">let</span> yLen = <span class="built_in">Math</span>.abs(e.touches[<span class="number">1</span>].pageY - e.touches[<span class="number">1</span>].pageY);</span><br><span class="line">      <span class="keyword">let</span> touchDistance = <span class="keyword">this</span>.getDistance(xLen,yLen);</span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.touchDistance) &#123;</span><br><span class="line">          <span class="keyword">let</span> pinchScale = touchDistance / <span class="keyword">this</span>.touchDistance</span><br><span class="line">          <span class="keyword">this</span>.emitEvent(<span class="string">'onPinch'</span>,&#123;<span class="attr">scale</span>:pinchScale - <span class="keyword">this</span>.previousPinchScale&#125;);</span><br><span class="line">          <span class="keyword">this</span>.previousPinchScale = pinchScale;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">   ...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>旋转(rotate)<br>旋转手势需要检测两个比较重要的值，一是旋转的角度，二是旋转的方向（顺时针或逆时针）。</p>
-<p><a href="https://blog.csdn.net/llll789789/article/details/98963341" target="_blank" rel="noopener">引用原文</a><br>首先，需要获取向量的旋转方向和角度。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这两个方法属于向量计算</span></span><br><span class="line"></span><br><span class="line">   getRotateDirection(vector1,vector2) &#123;</span><br><span class="line">    <span class="keyword">return</span> vector1.x * vector2.y - vector2.x * vector1.y;</span><br><span class="line">  &#125;  </span><br><span class="line">  getRotateAngle(vector1,vector2) &#123;</span><br><span class="line">    <span class="keyword">let</span> direction = <span class="keyword">this</span>.getRotateDirection(vector1,vector2);</span><br><span class="line">    direction = direction &gt; <span class="number">0</span> ? <span class="number">-1</span> : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> len1 = <span class="keyword">this</span>.getDistance(vector1.x,vector1.y);</span><br><span class="line">    <span class="keyword">let</span> len2 = <span class="keyword">this</span>.getDistance(vector2.x,vector2.y);</span><br><span class="line">    <span class="keyword">let</span> mr = len1 * len2;</span><br><span class="line">    <span class="keyword">if</span>(mr === <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> dot = vector1.x * vector2.x + vector1.y * vector2.y;</span><br><span class="line">    <span class="keyword">let</span> r = dot / mr;</span><br><span class="line">    <span class="keyword">if</span>(r &gt; <span class="number">1</span>) r = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(r &lt; <span class="number">-1</span>) r = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.acos(r) * direction * <span class="number">180</span> / <span class="built_in">Math</span>.PI;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后，我们在手指发生移动时，调用获取旋转方向和角度的方法。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">onTouchStart(e) &#123;</span><br><span class="line">  ...  </span><br><span class="line">  <span class="keyword">if</span>(e.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.touchVector = &#123;</span><br><span class="line">       x: point2.pageX - touchEvent.startX,</span><br><span class="line">       y: point2.pageY - touchEvent.startY</span><br><span class="line">     &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onTouchMove(e) &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span>.touchVector) &#123;</span><br><span class="line">        <span class="keyword">let</span> vector = &#123;</span><br><span class="line">          x: e.touches[<span class="number">1</span>].pageX - e.touches[<span class="number">0</span>].pageX,</span><br><span class="line">          y: e.touches[<span class="number">1</span>].pageY - e.touches[<span class="number">0</span>].pageY</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">let</span> angle = <span class="keyword">this</span>.getRotateAngle(vector,<span class="keyword">this</span>.touchVector);</span><br><span class="line">        <span class="comment">// 将角度(方向由正负决定)传入函数执行对应操作</span></span><br><span class="line">        <span class="keyword">this</span>.emitEvent(<span class="string">'onRotate'</span>,&#123;angle&#125;);</span><br><span class="line">        <span class="keyword">this</span>.touchVector.x = vector.x;</span><br><span class="line">        <span class="keyword">this</span>.touchVector.y = vector.y;</span><br><span class="line">      &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对手势的判断本质上就是对一个个点的判断, 有了办法获取手机上的点,通过某种计算就可以得到我们想要的结果.我在这次的h5项目中对移动的判断还添加了双指移动和三指移动,后来因为两个原因删除了,第一个是手机浏览器自带的手势功能会极大影响我写的移动逻辑,第二个就是移动的效果并不是那么的流畅,怎么考虑都是原生的滚动条占优势. 但本质的判断就是通过两个指头或者三个指头,算出一个基准点,因为算基准点的算法是一样的,所以用这个标准就可以去衡量地图的移动.</p>
-<p>我就用三个指头两两距离的均值来作为缩放的基准,三个指头三角形的重心作为移动的基准点,在缩放的同时进行移动,大家也可以根据自己的想法组合数据,达到自己想要的效果.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/02/hotMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/10/02/hotMap/" class="post-title-link" itemprop="url">小地图程序带给我的痛苦</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-10-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-10-02T00:00:00+08:00">2020-10-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-04 01:25:03" itemprop="dateModified" datetime="2020-10-04T01:25:03+08:00">2020-10-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="http://gzsmap.ccnu.edu.cn" target="_blank" rel="noopener">h5map</a></p>
-<p>一张简单的地图需要几个功能,移动地图,点击标记,放大缩小…</p>
-<p>不管移动地图,先来说一说对地图的标记和点击;</p>
-<p>对于不同的手机,屏幕有不同的大小,想要适配手机,就必须空余出手机参数,让浏览器填补参数,自动计算.这些都是题外话,和我想说的没有什么太大关系.这篇想讲的是图片的分区点击.</p>
-<p>在接到这个项目的时候,我第一个想到的就是找一个和图片一样大的div元素,把这个div元素覆盖到这张图片上面,再在这个div中放入若干个其他的div,给里面的元素设置点击事件,点击之后就在视图层添加一个标记.这些div的布局,最简单的,第一个想到的就是绝对定位,当然使用transform: trnaslate()也是一样的.这个方法有一个优点,可以使用border-radius属性让点击区域拥有圆角,但也有一个缺点,对于精细的不规则区域来说,这个方法想要成功,就要用很多个小的div去拼接成一个大的点击区域.</p>
-<p>并不是特别清楚一个真正的map应该怎么做,但是总是只用div让我觉得自己呆呆的,于是我又去搜了另一个东西 ———— 图片热区 <code>&lt;area&gt;</code>标签 还有 <code>&lt;map&gt;</code>标签, 这个标签的英文名让我觉得这个才是我需要的;</p>
-<p>先简单的介绍一下这个元素</p>
-<p>area 顾名思义 区域; 是用来定义点击的区域的; 他有几个属性</p>
-<p><code>&lt;area shape=&quot;&quot; coords=&quot;&quot; href =&quot;&quot; alt=&quot;&quot; /&gt;</code></p>
-<p>shape coords href alt, 还支持html的全局属性和事件属性;</p>
-<p>shape 用来指定区域的形状 有三个值 ‘rect’, ‘circle’, ‘poly’ 矩形区域, 圆形区域和不规则区域;<br>coords 用来指定区域的位置;<br>href 指定点击之后的链接<br>alt 替代文本</p>
-<p>rect 对应的 coords 是 “number1, number2, number3, number4” 分别代表矩形的一组对角坐标,前两个一个角,后两个一个角;<br>circle 对应的 coords 是 “x:number1, y: number2, radius: number3” 对应圆的中心点坐标和圆的半径;<br>poly 对应的 coords 是一连串的坐标”x1,y1,x2,y2,x3,y3…” 浏览器会将最后一个点和第一个点自动闭合.</p>
-<p><code>&lt;a&gt;</code>标签也支持这两个属性</p>
-<p>如果某个 area 标签中的坐标和其他区域发生了重叠，会优先采用最先出现的 area 标签。浏览器会忽略超过图像边界范围之外的坐标;</p>
-<p>有了点击的区域,那需要将 图片和区域连接起来,这里就需要另一个:<code>&lt;Map&gt;</code>标签;<br>  <code>&lt;map name=&quot;&quot; id=&quot;&quot;&gt;</code><br>  主要就是这两个属性,在 <a href="https://www.w3school.com.cn/tags/tag_map.asp" target="_blank" rel="noopener">W3school</a>中写到”<code>&lt;img&gt;</code>中的 usemap 属性可引用 <code>&lt;map&gt;</code> 中的 id 或 name 属性（取决于浏览器），所以我们应同时向 <code>&lt;map&gt;</code> 添加 id 和 name 属性。”<br>所以在填写时需要将两个一并填上.</p>
-<p>上面提到了 usemap 这个就是 链接图片和热区的必要属性;</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"#"</span> <span class="attr">alt</span>=<span class="string">"#"</span> <span class="attr">usemap</span>=<span class="string">"#map"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">map</span> <span class="attr">name</span>=<span class="string">"map"</span> <span class="attr">id</span>=<span class="string">"map"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">area</span> <span class="attr">shape</span>=<span class="string">"rect"</span> <span class="attr">coords</span>=<span class="string">"0,0,1,1"</span> <span class="attr">href</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">area</span> <span class="attr">shape</span>=<span class="string">"rect"</span> <span class="attr">coords</span>=<span class="string">"1,1,2,2"</span> <span class="attr">href</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">area</span> <span class="attr">shape</span>=<span class="string">"rect"</span> <span class="attr">coords</span>=<span class="string">"2,2,3,3"</span> <span class="attr">href</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">area</span> <span class="attr">shape</span>=<span class="string">"rect"</span> <span class="attr">coords</span>=<span class="string">"3,3,4,4"</span> <span class="attr">href</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">map</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这个就是一个完整的例子.实际的展示可以在W3School中试验.</p>
-<p>我们只要指定每个area元素的点击事件,浏览器就会根据绑定的事件进行处理. 功能已经实现,数据的处理就看个人的把握了.在标记地图点的时候一定要记得把名字起好,不然校对的时候会很麻烦.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/26/note/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/26/note/" class="post-title-link" itemprop="url">note</a>
+            <a href="/2020/12/15/crypto/" class="post-title-link" itemprop="url">crypto</a>
         </h1>
 
         <div class="post-meta">
@@ -654,7 +303,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-07-26 16:22:21 / 修改时间：17:58:30" itemprop="dateCreated datePublished" datetime="2020-07-26T16:22:21+08:00">2020-07-26</time>
+              <time title="创建时间：2020-12-15 15:34:53 / 修改时间：15:39:48" itemprop="dateCreated datePublished" datetime="2020-12-15T15:34:53+08:00">2020-12-15</time>
             </span>
 
           
@@ -668,175 +317,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <hr>
-<p>title: note<br>date: 2020.07.26<br>tag:  note</p>
-<hr>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/23/share3-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/23/share3-2/" class="post-title-link" itemprop="url">19级分享</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2020-07-23T00:00:00+08:00">2020-07-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-26 15:41:40" itemprop="dateModified" datetime="2020-07-26T15:41:40+08:00">2020-07-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>众所周知, 生活在js里的数组和对象是一种桀骜不驯的引用类型, 我们无法用’=’让他们好好听话, 小小的’=’无法创造新的对象, 只能创造出他们的分身, 这实在是令人沮丧.  但是记录历史我们是专业的, 有幸我们寻找到了驯服野生引用类型的珍贵资料.</p>
-<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p>引用类型是一种可以套娃的”数据类型”, 浅拷贝只是在第一层, 而深拷贝可以在无数层;对象利用<code>Object.keys(obj);</code>,<code>Object.getOwnPropertyNames</code>和<code>for...in</code>或者遍历等对各个键值对进行复制.<br>例子</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">objShallowClone</span>(<span class="params">source</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> target = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> source) &#123;</span><br><span class="line">        <span class="keyword">if</span> (source.hasOwnProperty(i)) &#123;</span><br><span class="line">            target[i] = source[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> target;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ArrayShallowClone</span>(<span class="params">source</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> source.map(<span class="function">(<span class="params">a</span>) =&gt;</span> a;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>方法一 JSON转换 </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj2 = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(obj));</span><br></pre></td></tr></table></figure>
-<p>缺点：</p>
-<p>（1）如果对象里有函数,函数无法被拷贝下来</p>
-<p>（2）无法拷贝copyObj对象原型链上的属性和方法</p>
-<p>（3）当数据的层次很深，会栈溢出</p>
-<p>方法二 递归函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params"> source </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!(<span class="keyword">typeof</span> sourse === <span class="string">'object'</span> &amp;&amp; sourse !== <span class="literal">null</span>)) <span class="keyword">return</span> source; </span><br><span class="line">  <span class="keyword">let</span> target = <span class="built_in">Array</span>.isArray( source ) ? [] : &#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> k <span class="keyword">in</span> source ) &#123;</span><br><span class="line">    <span class="keyword">if</span> (source.hasOwnProperty(k)) &#123;</span><br><span class="line">      <span class="keyword">if</span> ( <span class="keyword">typeof</span> source[ k ] === <span class="string">'object'</span> ) &#123;</span><br><span class="line">            target[ k ] = deepCopy( source[ k ] )</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            target[ k ] = source[ k ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> target</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>缺点<br> (1) 当数据的层次很深，会栈溢出;</p>
-<p>方法三 模拟栈克隆</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloneLoop</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> root = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 栈</span></span><br><span class="line">    <span class="keyword">const</span> loopList = [</span><br><span class="line">        &#123;</span><br><span class="line">            parent: root,</span><br><span class="line">            key: <span class="literal">undefined</span>,</span><br><span class="line">            data: x,</span><br><span class="line">        &#125;</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(loopList.length) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">const</span> node = loopList.pop();</span><br><span class="line">        <span class="keyword">const</span> parent = node.parent;</span><br><span class="line">        <span class="keyword">const</span> key = node.key;</span><br><span class="line">        <span class="keyword">const</span> data = node.data;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化赋值目标，key为undefined则拷贝到父元素，否则拷贝到子元素</span></span><br><span class="line">        <span class="keyword">let</span> res = parent;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> key !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">            res = parent[key] = &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> k <span class="keyword">in</span> data) &#123;</span><br><span class="line">            <span class="keyword">if</span> (data.hasOwnProperty(k)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">typeof</span> data[k] === <span class="string">'object'</span>) &#123;</span><br><span class="line">                    <span class="comment">// 下一次循环</span></span><br><span class="line">                    loopList.push(&#123;</span><br><span class="line">                        parent: res,   <span class="comment">//对象主体</span></span><br><span class="line">                        key: k,        <span class="comment">//属性名</span></span><br><span class="line">                        data: data[k], <span class="comment">//属性值</span></span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    res[k] = data[k];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以这个对象为例</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  describe: <span class="string">"floor1"</span>,</span><br><span class="line">  parent:&#123;</span><br><span class="line">    describe: <span class="string">"floor2"</span>,</span><br><span class="line">    parent:&#123;</span><br><span class="line">      describe: <span class="string">"floor3"</span>,</span><br><span class="line">      parent:&#123;</span><br><span class="line">        describe: <span class="string">"floor4"</span>,</span><br><span class="line">        parent:&#123;</span><br><span class="line">          child: <span class="string">"floor5"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  parent2:&#123;</span><br><span class="line">    describe: <span class="string">"floor2"</span>,</span><br><span class="line">    parent2:&#123;</span><br><span class="line">      child: <span class="string">"floor3"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>第一次循环中res为<code>{}</code>, 遍历obj中的属性, 符合OwnProperty的对象会被记录,而普通的基本数据会被复制. 此时<code>looplist</code>的值为</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">looplist = [&#123;</span><br><span class="line">  parent: &#123;</span><br><span class="line">    descibe: <span class="string">"floor1"</span></span><br><span class="line">  &#125;(<span class="number">1</span>),</span><br><span class="line">  key: <span class="string">"parent"</span>,</span><br><span class="line">  data: obj[parent]</span><br><span class="line">&#125;,&#123;</span><br><span class="line">  parent: &#123;</span><br><span class="line">    descibe: <span class="string">"floor1"</span></span><br><span class="line">  &#125;(<span class="number">1</span>),</span><br><span class="line">  key: <span class="string">"parent2"</span>,</span><br><span class="line">  data: obj[parent2]</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
-<p>最外层的对象遍历完成list中的元素, 相比利用递归算法使用真正的栈, 这个算法利用数组模拟栈, 使得栈不会轻易溢出, 增强了程序运行的稳定性.<br>第二次循环复制  <code>parent2</code>这个对象, <code>describe</code>会被推入对象, 而里面的的<code>parent2</code>对象会被放入模拟栈中, 等待执行.<br>第三次会将<code>child: floor3</code>复制…<br>由此可知, 每次执行时都会复制当层对象的基本数据, 将对象推入栈中. 逐层将对象完善.<br>在我认为, 递归算法是一次性将所有属性放到新的对象中, 不求出这个对象到底是什么不继续复制当层数据, 而这个算法是分次将属性复制, 我不在乎这个对象是什么, 只需要这里有一个对象, 等我把大体做完再追求细节, 这种思维是值得学习的. 将栈高转化成栈宽也是值得学习的.</p>
-<p>数组的拷贝也是如此, 在执行的时候再加入一条数组的判断, 上面的程序会更加完整.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/23/share3-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LAn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LAn's BLOG">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/23/share3-1/" class="post-title-link" itemprop="url">19级分享</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-23 00:00:00 / 修改时间：22:02:35" itemprop="dateCreated datePublished" datetime="2020-07-23T00:00:00+08:00">2020-07-23</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="事件-event"><a href="#事件-event" class="headerlink" title="事件(event)"></a>事件(event)</h2><p>事件被定义用来处理 用户 和 页面 的交互.onabort, onblur, onchange…等都是常见的<a href="https://www.w3school.com.cn/js/jsref_events.asp" target="_blank" rel="noopener">事件</a>.</p>
-<p>在js中,我们可以通过对元素的事件添加函数来绑定事件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params">...arg</span>) </span>&#123; statements &#125;;</span><br></pre></td></tr></table></figure>
-<p>对一个DOM元素进行多次绑定时,后者将覆盖前者.<br>移除事件只需要将绑定在DOM元素的函数重新赋值</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>).onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>).onclick = <span class="literal">null</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>另一种注册事件的方式支持一个事件绑定多个函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> demo = <span class="built_in">document</span>.getElementById(<span class="string">'demo'</span>);</span><br><span class="line">demo.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  statements;</span><br><span class="line">&#125;，<span class="literal">false</span>);</span><br><span class="line"><span class="comment">//第三个参数默认为false,事件冒泡。如果是true则是事件捕获</span></span><br><span class="line">demo.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  statements2;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>事件移除</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">demo.removeEventListener(<span class="string">'click'</span>, func);</span><br><span class="line"><span class="comment">// func 是 已经添加的有命名的函数, 匿名函数无法移除</span></span><br></pre></td></tr></table></figure>
-
-<p>老版本事件注册, 当时ie不支持事件捕获, 所以只有两个参数.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">demo.attachEvent(<span class="string">'onclick'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; statement &#125;);</span><br><span class="line">demo.attachEvent(<span class="string">'onclick'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; statement &#125;);</span><br><span class="line"><span class="comment">//移除事件</span></span><br><span class="line">demo.detachEvent(<span class="string">'onclick'</span>, func);</span><br></pre></td></tr></table></figure>
-
-<h2 id="事件流"><a href="#事件流" class="headerlink" title="事件流"></a>事件流</h2><p>网页是一个树状结构, 当事件触发时, 网页可以从出发事件的元素开始向上传递信息, 一层层向上冒泡, 也可以由网页向下去寻找捕获触发事件的元素.<br>现在的网页结合了两种, 当事件发生时, 网页会从最大的window出发, 经由document,body…ele捕获到交互的元素, 再从这个元素开始, 原路返回, 向上冒泡.</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line">``` </span><br><span class="line">事件传递 window -&gt; document -&gt; body -&gt; div -&gt; p -&gt; /p -&gt; /div -&gt; /body -&gt; document -&gt; window</span><br><span class="line">事件冒泡只会在自己的window范围内执行, 如果使用 iframe 将页面进行 套娃, 外部元素的事件不会收到内部的冒泡信息;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用 `event.stopPropagation();`可以阻止事件进一步传递; 既可以阻止捕获, 也可以阻止冒泡, 当一个元素上绑定了多个事件时, 同类事件会被执行. </span><br><span class="line"></span><br><span class="line">例如 div['a1','b1','c1'] -&gt; div2['a2','b2 || ','c2'] -&gt; /div2['/a1','/b1','/c1'] -&gt; /div['/a1','/b1','/c1']</span><br><span class="line">(括号内表示依次被绑定的函数 alert(x), || 表示 event.stopPropagation(); )</span><br><span class="line">那么输出是 a1,b1,c1,a2,b2,c2; 同一个元素的后续会被执行;</span><br><span class="line"></span><br><span class="line">`event.stopImmediatePropagation();` 与 `event.stopPropagation();` 类似, 但是 `event.stopImmediatePropagation();`会阻止同类事件继续执行, 即输出为 a1,b1,c1,a2,b2;</span><br><span class="line"></span><br><span class="line">在react中注册事件[参考链接](https://segmentfault.com/a/1190000017855734)</span><br><span class="line">``` jsx</span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span></span></span><br><span class="line"><span class="tag">  <span class="attr">onClick</span>=<span class="string">&#123;this.func&#125;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">onClickCapture</span>=<span class="string">&#123;this.func&#125;</span></span></span><br><span class="line"><span class="tag"> &gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在react中的事件是合成事件, 并不是js原生的. 在这个系统中,所有事件委托给顶部的document元素, 由document统一执行触发.在合成事件中<code>event.stopPropagation();</code>并不能真正阻止事件传播.”元素被点击时，真正的元素还是按照冒泡的方式，层层将事件交给上级元素进行处理，最后事件传播到docuement，触发合成事件”<code>event.stopPropagation();</code>阻止的是合成事件中的事件流. 如果给交互的元素绑定上真正的事件, 合成事件会被终止.<br>从合成事件里的event中可以获取原生event的属性,但是这个对象对于全局来说只有一个,每次事件结束之后会被清空,因此无法用异步操作获取.</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div</span><br><span class="line">  onClick=&#123;(e)=&gt;&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">        x: e.clientX,</span><br><span class="line">        y: e.clientY</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,<span class="number">1000</span>);</span><br><span class="line">  &#125;&#125;</span><br><span class="line">&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ Warning: This synthetic event is reused for preformance reasons.</span></span><br></pre></td></tr></table></figure>
-<p>有时我们需要混合使用原生事件与合成事件, 在生命周期中添加 <code>document.addEventListener(&#39;click&#39;, function(){});</code>, 上文提到在元素上绑定的事件会被处理成合成事件绑定在document中, 所以在触发一个时,必定触发另一个<code>event.stopPropagation();</code>无法阻止事件传播.必要时我们可以通过ref获取元素实例,通过对比 原生中<code>e.target</code>是否与合成事件中的目标相同来对控制流进行改变. 获取实例<code>React.createRef();</code></p>
-<p>在nodejs中的event模块也是大同小异<br>event有且仅提供了一个events.EventEmitter对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="keyword">var</span> eventEmitter = <span class="keyword">new</span> events.EventEmitter();</span><br></pre></td></tr></table></figure>
-<p>添加事件 <code>eventEmitter.addListener(&#39;eventName&#39;, listener);</code>或者<code>eventEmitter.on(&#39;eventName&#39;, listener);</code><br>移除事件 <code>removeListener(&#39;eventName&#39;, listener)</code> 移除所有,或指定复数事件 <code>removeAllListeners([event])</code><br>监听事件<code>emit(event, ...argu);</code><br>设置事件最大数量 <code>life.setMaxListeners(eventCount);</code><br>…</p>
-
+          <p>AES</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import AES from &apos;crypto-js/aes&apos;</span><br><span class="line">import Utf from &apos;crypto-js/enc-utf8&apos;</span><br><span class="line"></span><br><span class="line">const key = &quot;123&quot;</span><br><span class="line"></span><br><span class="line">const encode = AES.encrypt(&quot;你好&quot;, key);</span><br><span class="line">const decode = AES.decrypt(encode, key);</span><br><span class="line"></span><br><span class="line">// decode 默认输出 16进制 字符 通过utf解码</span><br><span class="line"></span><br><span class="line">Utf.stringify(decode)</span><br><span class="line">// 你好</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1043,6 +525,466 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/react-about/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/20/react-about/" class="post-title-link" itemprop="url">react 有关</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-20 23:29:08" itemprop="dateCreated datePublished" datetime="2020-03-20T23:29:08+08:00">2020-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-21 00:00:27" itemprop="dateModified" datetime="2020-03-21T00:00:27+08:00">2020-03-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="将-react-配置到-github-pages-上"><a href="#将-react-配置到-github-pages-上" class="headerlink" title="将 react 配置到 github pages 上"></a>将 react 配置到 github pages 上</h4><ol>
+<li><p>配置 package.json 文件</p>
+<p> homepage 为 clone 地址 前缀改为 github page 地址</p>
+<p> 地址: <code>https://github.com/shi-zhong/birth.git</code></p>
+</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"birth"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</span><br><span class="line">  <span class="attr">"homepage"</span>: <span class="string">"https://shi-zhong.github.io/birth"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br></pre></td></tr></table></figure>
+
+<p>配置脚本 “predeploy”: 打包文件; “deploy”: 上传文件至github的分支</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "start": "react-scripts start",</span><br><span class="line">  "build": "react-scripts build",</span><br><span class="line">  "test": "react-scripts test",</span><br><span class="line">  "eject": "react-scripts eject",</span><br><span class="line">  "predeploy": "npm run build",</span><br><span class="line">  "deploy": "gh-pages -d build"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>安装 gh-pages</li>
+</ol>
+<p><code>npm install gh-pages --save-dev</code></p>
+<p>  gh-pages官网<a href="https://www.npmjs.com/package/gh-pages" target="_blank" rel="noopener">https://www.npmjs.com/package/gh-pages</a></p>
+<ol start="3">
+<li><p>将文件上传至github, 执行<code>npm run deploy</code></p>
+</li>
+<li><p>访问 设置的网址</p>
+</li>
+</ol>
+<h4 id="安装-react-router"><a href="#安装-react-router" class="headerlink" title="安装 react-router"></a>安装 react-router</h4><ol>
+<li><p>执行代码 <code>npm install react-router-dom</code></p>
+</li>
+<li><p>报错 <code>Unexpected end of JSON input while parsing near</code> 执行 <code>npm cache clean --force</code></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/18/c-yuyan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/18/c-yuyan/" class="post-title-link" itemprop="url">C语言笔记</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-18 21:22:10" itemprop="dateCreated datePublished" datetime="2020-03-18T21:22:10+08:00">2020-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-19 01:03:13" itemprop="dateModified" datetime="2020-03-19T01:03:13+08:00">2020-03-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="第一章-C语言程序设计预备知识"><a href="#第一章-C语言程序设计预备知识" class="headerlink" title="第一章 C语言程序设计预备知识"></a>第一章 C语言程序设计预备知识</h4><ol>
+<li>硬件系统基本组成及工作原理<br>（1）运算器  -|<br>（2）控制器  -|-CPU<br>（3）存储器<br>（4）输入设备<br>（5）输出设备</li>
+<li>进制转换<br>小数转换：小数部分乘以2，记录整数部分，直至小数为零或者达到精度</li>
+<li>数据在计算机内部的存储<br>（1）原码 首位为符号位<br>（2）反码 首位为符号位，正数反码与原码相同，负数除首位其余按位求反<br>（3）补码 正数同原码，负数除符号位，按位求反，末位加1<br>（4）补码的计算 带符号位进行加法计算，符号位进位时，将进位的部分舍去<br>（5）ASCII 8位</li>
+<li>位运算(NOT、AND、OR、XOR)</li>
+</ol>
+<h4 id="第二章-C元语言程序设计基础"><a href="#第二章-C元语言程序设计基础" class="headerlink" title="第二章 C元语言程序设计基础"></a>第二章 C元语言程序设计基础</h4><ol>
+<li>程序语言发展<br>（1）机器语言 机器唯一识别的语言 0与1构成<br>（2）汇编语言 简单的英文字母代替特定二进制串，汇编程序用于将单词翻译成二进制串，依赖于机器硬件<br>（3）高级语言</li>
+<li>C语言发展/..</li>
+</ol>
+<h4 id="第三章-基本数据类型、运算符与表达式"><a href="#第三章-基本数据类型、运算符与表达式" class="headerlink" title="第三章 基本数据类型、运算符与表达式"></a>第三章 基本数据类型、运算符与表达式</h4><ol>
+<li>常用数据类型<br>基本数据类型（整形、字符型、实体型）、构造数据类型、指针类型、空类型</li>
+<li>常量、变量和标识符<br>（1）最长有效32位，至少8位，超长部分舍去<br>（2）大小写敏感</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/new-term/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/03/05/new-term/" class="post-title-link" itemprop="url">新学期班会</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-05 21:58:00 / 修改时间：23:37:43" itemprop="dateCreated datePublished" datetime="2020-03-05T21:58:00+08:00">2020-03-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="学习小节"><a href="#学习小节" class="headerlink" title="学习小节"></a>学习小节</h4><p>&emsp;&emsp;度过了一个学期之后，对大学的概念愈加清晰。大学说是很空的吧，他也有很多的课程需要学习；说大学任务很紧，比起高中来说，课程表空很多了，有很多时间是由我们自己来决定使用的。想想自己在寝室里的日子，能不出门就不出门，出门也就上课吃饭。在寝室里，大部分时间都是用来与计算机玩耍，正事也是有做，但游戏也玩的不少，时间的分配上还是要更加合理一点。玩归玩，至少课程不能落下。不能只沉浸在大学的自由里面，毕竟大学还是学习的地方，挂科还是很难受的，平时一定要时间花上去。学习是首位，规划好学习与放松，认真听讲，这样就不用连夜复习，在考试周之前疯狂复习了。<br>&emsp;&emsp;大学里我们也不仅仅学习专业知识(虽然计算机的部分这学期还没开始),我们现在不在家里面，不是躺在床上，醒来就有饭吃；洗完澡把衣服一丢，第二天洗好的衣服就会挂在阳台上。大学里我们也要学会照顾自己，学会掌握生活的技能，有空打扫干净自己的位置，勤丢垃圾，学会早上自觉地收拾好床铺，不要只是把衣服丢在角落里，等着洗衣机空出来，偶尔也要自己洗衣洗衣服，拖拖地，把寝室的氛围搞好。发展一下自己的兴趣，未未来做做准备。</p>
+<p>&emsp;&emsp;所以在家还是很舒服的，抓紧享受，回去很多事就要自己做了 =-=</p>
+<hr>
+<h4 id="寒假见闻"><a href="#寒假见闻" class="headerlink" title="寒假见闻"></a>寒假见闻</h4><p>&emsp;&emsp;寒假怎么说呢，还是很<strong><em>倒霉</em></strong>的。回到家的第二天就又出发前往贵州，先是等了一天的长途客车，结果耳机莫名其妙的<strong><em>裂开</em></strong>了。(之后它的命运也很坎坷，被我翻身压倒了，彻底裂开。)客车开了很久，窗上都是水，车内<strong><em>环境好差</em></strong>，空气又不好，还挤。路上一半<strong><em>身份证还不见</em></strong>了，<strong><em>糟糕</em></strong>死了。到了目的地还发现那不是目的地…骗我们到目的地附近的地方，就退我们那么点钱叫我们搭车，时间还刚好在客运站最后一班车出去之后。真是太巧了，太棒了(*****).然后就开始了乡下隔离，没有厕所，没有信号，房间通风很不错，凉嗖嗖的…<br>&emsp;&emsp;接下来就是拿着手机混日子，总算是可以回去了。坐的火车，票是到的那天买的，那时候还差点买不到，结果当天一节车里面都没几个人。<br>&emsp;&emsp;到家之后就一直宅家里坐自己的事情，敲敲<code>代码</code>，打打游戏，看看动漫。</p>
+<hr>
+<h4 id="线上学习情况-amp-新学期计划"><a href="#线上学习情况-amp-新学期计划" class="headerlink" title="线上学习情况&amp;新学期计划"></a>线上学习情况&amp;新学期计划</h4><ul>
+<li>线上学习<br>&emsp;&emsp;学习情况就是跟着学 =-= 这部分不知道能讲啥。基本进度跟着教师，不过有些作业还么有写。虽然有时候会卡，但基本都还好。</li>
+<li>新学期计划<br>&emsp;&emsp;计划这种东西还是很难搞得，学习这部分来说，教学进度不是我们决定的事情，能做到的就是跟上，巩固。其他的话,计划在这个学期能够多学一些技术性的东西，除了学校教的C语言课程之外，学一些关于计算机的事情，多参加一下这方面的活动之类的(不能只是一个宅男)</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/04/VBox/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/04/VBox/" class="post-title-link" itemprop="url">虚拟机安装及使用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-04 00:00:00 / 修改时间：13:47:43" itemprop="dateCreated datePublished" datetime="2020-02-04T00:00:00+08:00">2020-02-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这里使用的虚拟机为Vbox,官网进行下载(不记得命令行)，挂载正确的ISO文件，和增强ISO文件，将光盘作为第一启动项(系统),启动，选择启动盘，安装，在资源管理里找到增强光驱，运行安装程序。重启。在启动前讲硬盘放到第一位(否则会重新安装)。<br>[感觉增强似乎没啥用，画质好像好了一丢丢   (=-=)   ]</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/12/links/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/12/links/" class="post-title-link" itemprop="url">网页制作中的一些知识点(链接)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-12 15:59:27" itemprop="dateCreated datePublished" datetime="2019-12-12T15:59:27+08:00">2019-12-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-14 20:02:44" itemprop="dateModified" datetime="2020-04-14T20:02:44+08:00">2020-04-14</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>vertical-align <a href="http://www.cnblogs.com/starof/articles/4512284.html" target="_blank" rel="noopener">点击传送</a></li>
+<li>桌面美化 <a href="https://blog.csdn.net/lfs666666/article/details/87200054" target="_blank" rel="noopener">links</a></li>
+<li>桌面主题 <code>sudo apt-get install gnome-tweak-tool</code><br><a href="https://blog.csdn.net/lishanleilixin/article/details/80453565" target="_blank" rel="noopener">gnome-tweak-tool</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/CS-notes-share/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/11/CS-notes-share/" class="post-title-link" itemprop="url">CS-notes-share</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-11 16:58:28" itemprop="dateCreated datePublished" datetime="2019-12-11T16:58:28+08:00">2019-12-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-15 01:29:53" itemprop="dateModified" datetime="2019-12-15T01:29:53+08:00">2019-12-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="短连接AND长连接"><a href="#短连接AND长连接" class="headerlink" title="短连接AND长连接"></a>短连接AND长连接</h3><p>HTTP/1.1起默认长连接 断开连接 <code>Connection:close</code>;<br>HTTP/1.1前默认短连接 建立链接 <code>Connection:Keep-Alive</code></p>
+<h3 id="验证缓存"><a href="#验证缓存" class="headerlink" title="验证缓存"></a>验证缓存</h3><p>ETag首部字段，用于标识资源。同一个URL下会有多个不同的资源，为了区分引入了ETag。<br>ETag放入If-None-Match首部中，可用于检查资源是否有效，若有效则返回304 Not Modified。</p>
+<h3 id="范围请求"><a href="#范围请求" class="headerlink" title="范围请求"></a>范围请求</h3><p>为了避免网络中断后重复发送数据，用range指定发送数据范围<br>请求成功后服务器返回206 Partial Content 状态码</p>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><p>HTTP缺陷:</p>
+<ol>
+<li>明文通信，可能被窃听</li>
+<li>身份易被伪装</li>
+<li>报文有风险被篡改</li>
+</ol>
+<p>HTTPS 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）通信，再由 SSL 和 TCP 通信，也就是说 HTTPS 使用了隧道进行通信。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">		http	   https</span><br><span class="line">	客户端--------&gt;SSL--------&gt;服务器</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">#### SSL</span><br><span class="line">SSL是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层与应用层之间对网络连接进行加密。</span><br><span class="line">1）认证用户和服务器，确保数据发送到正确的客户机和服务器；</span><br><span class="line">2）加密数据以防止数据中途被窃取；</span><br><span class="line">3）维护数据的完整性，确保数据在传输过程中不被改变。</span><br><span class="line"></span><br><span class="line">##### 流程</span><br><span class="line"></span><br><span class="line">###### 服务器认证</span><br><span class="line">```txt</span><br><span class="line">客户端	|----&gt;	发送	开始	  信息	------&gt;	|服务器</span><br><span class="line">	|&lt;----	判断	生成秘钥  响应	&lt;------	|</span><br><span class="line">	|----&gt;	生成秘钥 加密	传输	------&gt;	|</span><br><span class="line">	|&lt;----	回复秘钥 返回认证信息	&lt;------	|</span><br></pre></td></tr></table></figure>
+<p>服务器认证阶段:</p>
+<ol>
+<li>客户端向服务器发送一个开始信息“Hello”以便开始一个新的会话连接</li>
+<li>服务器根据客户的信息确定是否需要生成新的主密钥，如需要则服务器在响应客户的“Hello”信息时将包含生成主密钥所需的信息</li>
+<li>客户根据收到的服务器响应信息，产生一个主密钥，并用服务器的公开密钥加密后传给服务器</li>
+<li>服务器回复该主密钥，并返回给客户一个用主密钥认证的信息，以此让客户认证服务器。</li>
+</ol>
+<h6 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">客户端	|&lt;----		发送提问	&lt;------	|服务器</span><br><span class="line">	|----&gt;	返回数字签名和公开密钥	------&gt;	|</span><br></pre></td></tr></table></figure>
+<p>用户认证阶段:<br>在此之前，服务器已经通过了客户认证，这一阶段主要完成对客户的认证。经认证的服务器发送一个提问给客户，客户则返回（数字）签名后的提问和其公开密钥，从而向服务器提供认证。</p>
+<h4 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h4><p> 对称加密: 使用同一密钥(优:运算快;缺点:无法将密钥安全传输)<br>不对称加密:使用不同密钥(优:安全传输密钥;缺:运算速度慢)</p>
+<p>HTTPS 不对称加密密钥，再用对称密钥通信</p>
+<h4 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h4><p>通过使用 证书 来对通信方进行认证。</p>
+<p>数字证书认证机构（CA，Certificate Authority）是客户端与服务器双方都可信赖的第三方机构。</p>
+<p>服务器的运营人员向 CA 提出公开密钥的申请，CA 在判明提出申请者的身份之后，会对已申请的公开密钥做数字签名，然后分配这个已签名的公开密钥，并将该公开密钥放入公开密钥证书后绑定在一起。</p>
+<p>进行 HTTPS 通信时，服务器会把证书发送给客户端。客户端取得其中的公开密钥之后，先使用数字签名进行验证，如果验证通过，就可以开始通信了。</p>
+<h4 id="HTTPS缺点"><a href="#HTTPS缺点" class="headerlink" title="HTTPS缺点"></a>HTTPS缺点</h4><ol>
+<li>因为需要进行加密解密等过程，因此速度会更慢；</li>
+<li>需要支付证书授权的高额费用。</li>
+</ol>
+<p><a href="https://blog.csdn.net/qq_38950316/article/details/81087809" target="_blank" rel="noopener">握手</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1113,12 +1055,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -1143,7 +1085,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

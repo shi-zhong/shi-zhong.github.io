@@ -46,14 +46,18 @@
   };
 </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="LAn&#39;s BLOG">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2020&#x2F;11&#x2F;index.html">
+  <meta name="description" content="AES 123456789101112import AES from &amp;apos;crypto-js&#x2F;aes&amp;apos;import Utf from &amp;apos;crypto-js&#x2F;enc-utf8&amp;apos;const key = &amp;quot;123&amp;quot;const encode = AES.encrypt(&amp;quot;你好&amp;quot;, key);const decode = AES.">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="crypto">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;12&#x2F;15&#x2F;crypto&#x2F;index.html">
 <meta property="og:site_name" content="LAn&#39;s BLOG">
+<meta property="og:description" content="AES 123456789101112import AES from &amp;apos;crypto-js&#x2F;aes&amp;apos;import Utf from &amp;apos;crypto-js&#x2F;enc-utf8&amp;apos;const key = &amp;quot;123&amp;quot;const encode = AES.encrypt(&amp;quot;你好&amp;quot;, key);const decode = AES.">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-12-15T07:39:48.274Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/2020/11/">
+<link rel="canonical" href="http://yoursite.com/2020/12/15/crypto/">
 
 
 <script id="page-configurations">
@@ -61,11 +65,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>归档 | LAn's BLOG</title>
+  <title>crypto | LAn's BLOG</title>
   
 
 
@@ -159,49 +163,84 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 19 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/15/crypto/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LAn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LAn's BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          crypto
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-15 15:34:53 / 修改时间：15:39:48" itemprop="dateCreated datePublished" datetime="2020-12-15T15:34:53+08:00">2020-12-15</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
+        <p>AES</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import AES from &apos;crypto-js/aes&apos;</span><br><span class="line">import Utf from &apos;crypto-js/enc-utf8&apos;</span><br><span class="line"></span><br><span class="line">const key = &quot;123&quot;</span><br><span class="line"></span><br><span class="line">const encode = AES.encrypt(&quot;你好&quot;, key);</span><br><span class="line">const decode = AES.decrypt(encode, key);</span><br><span class="line"></span><br><span class="line">// decode 默认输出 16进制 字符 通过utf解码</span><br><span class="line"></span><br><span class="line">Utf.stringify(decode)</span><br><span class="line">// 你好</span><br></pre></td></tr></table></figure>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-11-07T18:35:12+08:00"
-              content="2020-11-07">
-          11-07
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+          </div>
 
-      <h2 class="post-title">
-          <a class="post-title-link" href="/2020/11/07/share5-1/" itemprop="url">
-            <span itemprop="name">share5-1</span>
-          </a>
-      </h2>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/27/java/" rel="prev" title="JAVA NOTE">
+      <i class="fa fa-chevron-left"></i> JAVA NOTE
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/16/share5.1/" rel="next" title="前端分享">
+      前端分享 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-    </div>
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -265,12 +304,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -295,7 +334,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
